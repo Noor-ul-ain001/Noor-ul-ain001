@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <a href="https://linkedin.com/in/noor-mudasir">LinkedIn</a> ·
+  <a href="https://www.linkedin.com/in/noor-mudasir-299a64256?utm_source=share_via&utm_content=profile&utm_medium=member_android ">LinkedIn</a> .
   <a href="https://noor-portfolio-steel.vercel.app">Portfolio</a> ·
   <a href="mailto:aina25239@gmail.com">Email</a>
 </p>
