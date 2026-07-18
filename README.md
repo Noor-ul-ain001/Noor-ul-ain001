@@ -16,7 +16,7 @@
 ### About Me
 
 I build production-grade **multiagent systems**, **RAG pipelines**, and **MCP-integrated workflows**.  
-Currently enrolled in the **Panaversity Agent Factory Program (GIAIC)** — focused on agentic AI architecture and Digital FTE systems.
+Currently enrolled in the **Governor Sindh IT Initiative (GIAIC)** — focused on agentic AI architecture and Digital FTE systems.
 
 ---
 
