@@ -56,10 +56,3 @@ Currently enrolled in the **Governor Sindh IT Initiative (GIAIC)** — focused o
 | HungerMap PK | Next.js · Neon DB · Drizzle ORM | Food insecurity platform — DYLP GenAI Hackathon 2026 |
 
 ---
-
-### GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Noor-ul-ain001&show_icons=true&theme=dark&hide_border=true" height="150"/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Noor-ul-ain001&layout=compact&theme=dark&hide_border=true" height="150"/>
-</p>
