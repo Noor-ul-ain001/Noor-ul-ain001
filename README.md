@@ -58,6 +58,8 @@ Architected the entire database for HungerMap PK using Neon DB and Drizzle ORM, 
 🎓 BA — University of Karachi ──────────────────────────────── Completed
 Supplemented my formal education with specialized certifications from Anthropic, Panaversity, and more.
 
+text
+
 ---
 
 ## 🛠️ My Tech Stack
@@ -178,6 +180,8 @@ Each of these projects represents a step forward in my journey to master AI engi
 
 </div>
 
+> ⚠️ **If the trophies don't show**, please wait a few seconds or refresh. The service is sometimes rate‑limited. You can also try changing the `theme` parameter (e.g., `&theme=onedark`) to see if that helps.
+
 ---
 
 ## 🐍 My Contribution Snake
@@ -188,7 +192,7 @@ Each of these projects represents a step forward in my journey to master AI engi
 
 </div>
 
-> *This snake animation is generated from my daily contribution graph. It updates automatically via the [Platane/snk](https://github.com/Platane/snk) GitHub Action.*
+> 🐍 **To make the snake appear**, you need to set up the [Platane/snk](https://github.com/Platane/snk) GitHub Action in your repository. Once configured, the image will update automatically with your contributions. Until then, you'll see a broken image – that's normal.
 
 ---
 
