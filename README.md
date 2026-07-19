@@ -1,7 +1,68 @@
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Noor%20ul%20Ain&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Agentic%20AI%20Engineer%20%7C%20Full-Stack%20Developer%20%7C%20Open-Source%20Advocate&descAlignY=58&descSize=18" width="100%"/>
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=A855F7&center=true&vCenter=true&width=900&lines=I+am+Noor+ul+Ain;🚀+I+build+Agentic+AI+Systems;🔗+I+engineer+MCP+Workflows;🌟+I+actively+contribute+to+Open+Source;⚡+I+craft+Digital+FTE+Systems+at+Panaversity)](https://git.io/typing-svg)
+
+<br/>
+
+📍 **Karachi, Pakistan** · BA, University of Karachi
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-noor--mudasir--299a64256-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0A66C2&color=0A66C2)](https://www.linkedin.com/in/noor-mudasir-299a64256/)
+[![GitHub](https://img.shields.io/badge/GitHub-Noor--ul--ain001-F59E0B?style=for-the-badge&logo=github&logoColor=black&labelColor=F59E0B&color=F59E0B)](https://github.com/Noor-ul-ain001)
+[![Portfolio](https://img.shields.io/badge/Portfolio-noor--portfolio-A855F7?style=for-the-badge&logo=vercel&logoColor=white&labelColor=A855F7&color=A855F7)](https://noor-portfolio-steel.vercel.app)
+[![Email](https://img.shields.io/badge/Email-aina25239@gmail.com-EC4899?style=for-the-badge&logo=gmail&logoColor=white&labelColor=EC4899&color=EC4899)](mailto:aina25239@gmail.com)
+
+![Profile Views](https://komarev.com/ghpvc/?username=Noor-ul-ain001&color=a855f7&style=flat-square&label=Profile+Views)
+![GitHub followers](https://img.shields.io/github/followers/Noor-ul-ain001?color=06b6d4&style=flat-square&logo=github&label=Followers)
 
 ---
 
-## 🛠️ Tech Stack
+</div>
+
+## 👨‍💻 About Me
+
+<div align="center">
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=06B6D4&center=true&vCenter=true&width=700&lines=👋+Hi,+I+am+Noor+ul+Ain;🧠+I+am+an+Agentic+AI+Developer+from+Karachi;🔧+I+am+a+Full-Stack+Engineer+%26+Open-Source+Advocate;🤝+I+am+open+to+remote+roles+in+AI%2FML+Engineering)](https://git.io/typing-svg)
+
+</div>
+
+I am **Noor ul Ain**, an Agentic AI Engineer with a deep passion for building production-grade systems that bridge the gap between cutting-edge AI research and real-world applications. My expertise lies in designing **multi-agent orchestrations**, developing robust **RAG pipelines**, and integrating **MCP workflows**—all the way from initial architecture to seamless deployment.
+
+My mission is to create autonomous, intelligent systems that act as digital employees (FTEs), solving complex problems with loop engineering and spec-driven development. I take pride in my ability to ship high-quality code, evidenced by my **12 merged open-source contributions**, and my relentless pursuit of learning through programs like the **Panaversity Agent Factory**.
+
+| | |
+|---|---|
+| ⚡ | **12 Merged PRs** across active open‑source repos (github/spec‑kit, OpenClaw) |
+| 🤖 | Currently enrolled in **Panaversity Agent Factory Program (GIAIC)** under Sir Anas — specializing in Loop Engineering & Digital FTE |
+| 🏗️ | Proficient in multiagent orchestration, harness engineering, and spec‑driven development |
+| 🎓 | **Anthropic Certified** — MCP Fundamentals, Claude Code in Action, Claude 101 |
+| 🗄️ | Sole database architect on **HungerMap PK** — a standout project from the DYLP GenAI Hackathon 2026 |
+| 🌐 | Check out my work live at [noor-portfolio-steel.vercel.app](https://noor-portfolio-steel.vercel.app) |
+
+---
+
+## 🛤️ My Journey
+
+My path into the world of Agentic AI and Full-Stack development has been a thrilling ride of continuous learning and practical application.
+🏫 Panaversity Agent Factory (GIAIC) ─────────────────────── 2024 → present
+Diving deep into Agentic AI, Loop Engineering, Digital FTE, and Spec-Driven Development.
+
+🌟 Open-Source Contributor ─────────────────────────────────── 2024 → present
+Making meaningful contributions to the developer ecosystem with 11 PRs to github/spec-kit and 1 to OpenClaw.
+
+🗺️ DYLP GenAI Hackathon 2026 ───────────────────────────────── 2026
+Architected the entire database for HungerMap PK using Neon DB and Drizzle ORM, handling food insecurity data.
+
+🎓 BA — University of Karachi ──────────────────────────────── Completed
+Supplemented my formal education with specialized certifications from Anthropic, Panaversity, and more.
+
+---
+
+## 🛠️ My Tech Stack
+
+Here is the toolkit I use to bring my agentic and full-stack visions to life:
 
 **🤖 AI / LLM Engineering**
 
@@ -46,11 +107,11 @@
 
 ---
 
-## 📊 Quick Stats
+## 📊 My Impact in Numbers
 
 <div align="center">
 
-| 🔀 Merged PRs | 🚀 AI Projects | 🎓 Certifications | 🌟 Repos |
+| 🔀 Merged PRs | 🚀 AI Projects Built | 🎓 Certifications Earned | 🌟 Notable Repos |
 |:---:|:---:|:---:|:---:|
 | **12+** | **6+** | **5+** | **2+** |
 
@@ -58,39 +119,43 @@
 
 ---
 
-## 🌟 Open‑Source Contributions
+## 🌟 My Open‑Source Contributions
+
+I believe in giving back to the developer community that has taught me so much. Here are some of the contributions I am most proud of:
 
 #### 🐙 [github/spec-kit](https://github.com/github/spec-kit) — GitHub's internal spec‑driven developer tooling
 ![PRs](https://img.shields.io/badge/Merged_PRs-11-10B981?style=flat-square&logo=github)
 
-- ✅ Fixed `CURRENT_BRANCH` fallback logic in Git extension scripts
-- ✅ Added support for multi‑expression template interpolation
-- ✅ Implemented host‑less catalog URL validators
-- ✅ Documented undocumented subcommands for developer reference
-- ✅ Improved overall CLI reliability and edge‑case handling across multiple PRs
+- ✅ Fixed `CURRENT_BRANCH` fallback logic in Git extension scripts to prevent runtime errors.
+- ✅ Added support for multi‑expression template interpolation, making the tool more flexible.
+- ✅ Implemented host‑less catalog URL validators to improve security and reliability.
+- ✅ Documented previously undocumented subcommands, enhancing the developer experience.
+- ✅ Improved overall CLI reliability and edge‑case handling across multiple PRs.
 
 #### 🦾 [OpenClaw](https://github.com/openclaw/openclaw) — AI coding agent CLI
 ![PRs](https://img.shields.io/badge/Merged_PRs-1-10B981?style=flat-square&logo=github)
 
-- ✅ Fixed false‑positive "cron service unavailable" warning for healthy scheduled jobs (Issue #69939)
+- ✅ Fixed a false‑positive "cron service unavailable" warning for healthy scheduled jobs (Issue #69939), ensuring smoother operation for users.
 
 ---
 
-## 🚀 Featured Projects
+## 🚀 My Featured Projects
+
+Each of these projects represents a step forward in my journey to master AI engineering and full-stack development.
 
 | 🔖 | Project | Stack | Description |
 |---|---|---|---|
-| 🤖 | **AI Employee (Digital FTE)** | Python · OpenAI SDK · MCP | Autonomous AI employee with harness files, loop engineering & human‑in‑the‑loop |
-| 🔍 | **Multi‑Agent Codebase Auditor** | Python · FastAPI · Pydantic AI · Claude API | 4‑agent pipeline: Mapper, Security Auditor, Skill Generator, Prioritizer |
-| 🗺️ | **HungerMap PK** | Next.js · Neon DB · Drizzle ORM · FastAPI | Food insecurity & NGO‑matching platform — DYLP GenAI Hackathon 2026; sole DB architect |
-| 💬 | **RAG‑Based AI Chatbot** | Python · FastAPI · Vector DB | Retrieval‑augmented chatbot with semantic search |
-| 🎮 | **AI Fluency Arcade** | HTML · CSS · Vanilla JS | Interactive app teaching 13 AI prompting concepts — Panaversity challenge |
-| 🌐 | **Personal Portfolio** | Next.js · TypeScript · Framer Motion | Dark cinematic noir design, deployed on Vercel |
-| 👁️ | **Background Removal Tool** | Python · OpenCV · MediaPipe | Real‑time background removal via pose estimation |
+| 🤖 | **AI Employee (Digital FTE)** | Python · OpenAI SDK · MCP | An autonomous AI employee capable of executing complex tasks using harness files, loop engineering, and human‑in‑the‑loop feedback. |
+| 🔍 | **Multi‑Agent Codebase Auditor** | Python · FastAPI · Pydantic AI · Claude API | A 4‑agent pipeline (Mapper, Security Auditor, Skill Generator, Prioritizer) that automatically audits and improves codebases. |
+| 🗺️ | **HungerMap PK** | Next.js · Neon DB · Drizzle ORM · FastAPI | A platform tackling food insecurity by matching NGOs with resources. I served as the sole database architect for this DYLP GenAI Hackathon 2026 project. |
+| 💬 | **RAG‑Based AI Chatbot** | Python · FastAPI · Vector DB | A retrieval-augmented chatbot that leverages semantic search to provide accurate, context-aware responses. |
+| 🎮 | **AI Fluency Arcade** | HTML · CSS · Vanilla JS | An interactive web app designed to teach 13 core AI prompting concepts—a submission for the Panaversity challenge. |
+| 🌐 | **Personal Portfolio** | Next.js · TypeScript · Framer Motion | My dark, cinematic noir themed portfolio, deployed on Vercel to showcase my work. |
+| 👁️ | **Background Removal Tool** | Python · OpenCV · MediaPipe | A real-time background removal tool powered by pose estimation using OpenCV and MediaPipe. |
 
 ---
 
-## 📈 GitHub Analytics
+## 📈 My GitHub Analytics
 
 <div align="center">
 
@@ -115,7 +180,7 @@
 
 ---
 
-## 🐍 Contribution Snake
+## 🐍 My Contribution Snake
 
 <div align="center">
 
@@ -123,11 +188,13 @@
 
 </div>
 
-> *This snake animation updates daily. To enable it, add the [Platane/snk](https://github.com/Platane/snk) GitHub Action to your repo.*
+> *This snake animation is generated from my daily contribution graph. It updates automatically via the [Platane/snk](https://github.com/Platane/snk) GitHub Action.*
 
 ---
 
-## 🏅 Certifications
+## 🏅 My Certifications
+
+I am committed to continuous learning and professional development, holding certifications from industry leaders:
 
 | 🎓 Issuer | 📜 Certification |
 |---|---|
@@ -139,11 +206,11 @@
 
 ---
 
-## 🔭 Currently Exploring
+## 🔭 What I'm Currently Exploring
 
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=EC4899&center=true&vCenter=true&width=600&lines=🔄+Advanced+agentic+loop+engineering;🔌+MCP+server+architecture+%26+orchestration;📐+Scalable+multi‑agent+systems;🤝+Open‑source+agentic+AI+tooling)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=EC4899&center=true&vCenter=true&width=700&lines=🔄+Advanced+agentic+loop+engineering;🔌+MCP+server+architecture+%26+orchestration;📐+Building+truly+scalable+multi‑agent+systems;🤝+Contributing+to+more+open‑source+agentic+AI+tooling)](https://git.io/typing-svg)
 
 </div>
 
@@ -153,7 +220,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
 
-*🤝 Open to remote internships and roles in AI/ML Engineering, Agentic AI & Full‑Stack Development*
+*🤝 I am open to remote internships and roles in AI/ML Engineering, Agentic AI, and Full‑Stack Development. Let's build something amazing together!*
 
 [![Email](https://img.shields.io/badge/aina25239@gmail.com-EC4899?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aina25239@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noor-mudasir-299a64256/)
