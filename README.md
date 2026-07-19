@@ -1,59 +1,7 @@
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Noor%20ul%20Ain&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Agentic%20AI%20Developer%20%C2%B7%20Full-Stack%20Developer%20%C2%B7%20Open-Source%20Contributor&descAlignY=58&descSize=16" width="100%"/>
-
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=A855F7&center=true&vCenter=true&width=650&lines=🤖+Building+Agentic+AI+Systems...;🔗+Engineering+MCP+Workflows...;🚀+Shipping+RAG+Pipelines+to+Prod...;🌟+Contributing+to+Open+Source...;⚡+Crafting+Digital+FTE+Systems...)](https://git.io/typing-svg)
-
-<br/>
-
-📍 **Karachi, Pakistan** · BA, University of Karachi
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-noor--mudasir-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noor-mudasir)
-[![GitHub](https://img.shields.io/badge/GitHub-Noor--ul--ain001-F59E0B?style=for-the-badge&logo=github&logoColor=black)](https://github.com/Noor-ul-ain001)
-[![Portfolio](https://img.shields.io/badge/Portfolio-noor--portfolio-A855F7?style=for-the-badge&logo=vercel&logoColor=white)](https://noor-portfolio-steel.vercel.app)
-[![Email](https://img.shields.io/badge/Email-aina25239@gmail.com-EC4899?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aina25239@gmail.com)
-
-![Profile Views](https://komarev.com/ghpvc/?username=Noor-ul-ain001&color=a855f7&style=flat-square&label=Profile+Views)
-![GitHub followers](https://img.shields.io/github/followers/Noor-ul-ain001?color=06b6d4&style=flat-square&logo=github&label=Followers)
-
-</div>
 
 ---
 
-### 🧠 About Me
-
-> I build production-grade **multiagent systems**, **RAG pipelines**, and **MCP-integrated workflows** — from architecture to deployment.
-
-| | |
-|---|---|
-| ⚡ | **12 Merged PRs** across active open-source repos |
-| 🤖 | Enrolled in **Panaversity Agent Factory Program (GIAIC)** under Sir Anas — Loop Engineering & Digital FTE |
-| 🏗️ | Experienced in multiagent orchestration, harness engineering, and spec-driven development |
-| 🎓 | **Anthropic Certified** — MCP, Claude Code in Action, Claude 101 |
-| 🗄️ | Sole database architect on **HungerMap PK** — DYLP GenAI Hackathon 2026 |
-| 🌐 | Portfolio live at [noor-portfolio-steel.vercel.app](https://noor-portfolio-steel.vercel.app) |
-
----
-
-### 🛤️ Journey
-
-```
-🏫 Panaversity Agent Factory (GIAIC)  ─────────────────────── 2024 → present
-   Agentic AI · Loop Engineering · Digital FTE · Spec-Driven Dev
-
-🌟 Open-Source Contributor ─────────────────────────────────── 2024 → present
-   github/spec-kit (11 PRs) · OpenClaw (1 PR) · 12 total merged
-
-🗺️ DYLP GenAI Hackathon 2026 ───────────────────────────────── 2026
-   HungerMap PK · Sole DB Architect · Neon DB + Drizzle ORM
-
-🎓 BA — University of Karachi ──────────────────────────────── Completed
-   + Anthropic · Panaversity · Vista Equity · Skyscanner certs
-```
-
----
-
-### 🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 **🤖 AI / LLM Engineering**
 
@@ -98,7 +46,7 @@
 
 ---
 
-### 📊 Quick Stats
+## 📊 Quick Stats
 
 <div align="center">
 
@@ -110,39 +58,39 @@
 
 ---
 
-### 🌟 Open-Source Contributions
+## 🌟 Open‑Source Contributions
 
-#### 🐙 [github/spec-kit](https://github.com/github/spec-kit) — GitHub's internal spec-driven developer tooling
+#### 🐙 [github/spec-kit](https://github.com/github/spec-kit) — GitHub's internal spec‑driven developer tooling
 ![PRs](https://img.shields.io/badge/Merged_PRs-11-10B981?style=flat-square&logo=github)
 
 - ✅ Fixed `CURRENT_BRANCH` fallback logic in Git extension scripts
-- ✅ Added support for multi-expression template interpolation
-- ✅ Implemented host-less catalog URL validators
+- ✅ Added support for multi‑expression template interpolation
+- ✅ Implemented host‑less catalog URL validators
 - ✅ Documented undocumented subcommands for developer reference
-- ✅ Improved overall CLI reliability and edge-case handling across multiple PRs
+- ✅ Improved overall CLI reliability and edge‑case handling across multiple PRs
 
 #### 🦾 [OpenClaw](https://github.com/openclaw/openclaw) — AI coding agent CLI
 ![PRs](https://img.shields.io/badge/Merged_PRs-1-10B981?style=flat-square&logo=github)
 
-- ✅ Fixed false-positive "cron service unavailable" warning for healthy scheduled jobs (Issue #69939)
+- ✅ Fixed false‑positive "cron service unavailable" warning for healthy scheduled jobs (Issue #69939)
 
 ---
 
-### 🚀 Featured Projects
+## 🚀 Featured Projects
 
 | 🔖 | Project | Stack | Description |
 |---|---|---|---|
-| 🤖 | **AI Employee (Digital FTE)** | Python · OpenAI SDK · MCP | Autonomous AI employee with harness files, loop engineering & human-in-the-loop |
-| 🔍 | **Multi-Agent Codebase Auditor** | Python · FastAPI · Pydantic AI · Claude API | 4-agent pipeline: Mapper, Security Auditor, Skill Generator, Prioritizer |
-| 🗺️ | **HungerMap PK** | Next.js · Neon DB · Drizzle ORM · FastAPI | Food insecurity & NGO-matching platform — DYLP GenAI Hackathon 2026; sole DB architect |
-| 💬 | **RAG-Based AI Chatbot** | Python · FastAPI · Vector DB | Retrieval-augmented chatbot with semantic search |
+| 🤖 | **AI Employee (Digital FTE)** | Python · OpenAI SDK · MCP | Autonomous AI employee with harness files, loop engineering & human‑in‑the‑loop |
+| 🔍 | **Multi‑Agent Codebase Auditor** | Python · FastAPI · Pydantic AI · Claude API | 4‑agent pipeline: Mapper, Security Auditor, Skill Generator, Prioritizer |
+| 🗺️ | **HungerMap PK** | Next.js · Neon DB · Drizzle ORM · FastAPI | Food insecurity & NGO‑matching platform — DYLP GenAI Hackathon 2026; sole DB architect |
+| 💬 | **RAG‑Based AI Chatbot** | Python · FastAPI · Vector DB | Retrieval‑augmented chatbot with semantic search |
 | 🎮 | **AI Fluency Arcade** | HTML · CSS · Vanilla JS | Interactive app teaching 13 AI prompting concepts — Panaversity challenge |
 | 🌐 | **Personal Portfolio** | Next.js · TypeScript · Framer Motion | Dark cinematic noir design, deployed on Vercel |
-| 👁️ | **Background Removal Tool** | Python · OpenCV · MediaPipe | Real-time background removal via pose estimation |
+| 👁️ | **Background Removal Tool** | Python · OpenCV · MediaPipe | Real‑time background removal via pose estimation |
 
 ---
 
-### 📈 GitHub Stats
+## 📈 GitHub Analytics
 
 <div align="center">
 
@@ -157,7 +105,7 @@
 
 ---
 
-### 🏆 Certifications
+## 🏆 Certifications
 
 | 🎓 Issuer | 📜 Certification |
 |---|---|
@@ -169,12 +117,13 @@
 
 ---
 
-### 🔭 Currently Exploring
+## 🔭 Currently Exploring
 
-- 🔄 Advanced agentic loop engineering and spec-driven development patterns
-- 🔌 MCP server architecture and cross-tool orchestration
-- 📐 Scalable AI system design with multi-agent coordination
-- 🤝 Contributing to open-source agentic AI tooling
+<div align="center">
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=EC4899&center=true&vCenter=true&width=600&lines=🔄+Advanced+agentic+loop+engineering;🔌+MCP+server+architecture+%26+orchestration;📐+Scalable+multi‑agent+systems;🤝+Open‑source+agentic+AI+tooling)](https://git.io/typing-svg)
+
+</div>
 
 ---
 
@@ -182,10 +131,10 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
 
-*🤝 Open to remote internships and roles in AI/ML Engineering, Agentic AI & Full-Stack Development*
+*🤝 Open to remote internships and roles in AI/ML Engineering, Agentic AI & Full‑Stack Development*
 
 [![Email](https://img.shields.io/badge/aina25239@gmail.com-EC4899?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aina25239@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noor-mudasir)
+[![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noor-mudasir-299a64256/)
 [![Portfolio](https://img.shields.io/badge/View_Portfolio-A855F7?style=for-the-badge&logo=vercel&logoColor=white)](https://noor-portfolio-steel.vercel.app)
 
 </div>
