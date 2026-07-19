@@ -1,6 +1,16 @@
 
 ---
 
+## 🎯 Current Focus
+
+<div align="center">
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=EC4899&center=true&vCenter=true&width=600&lines=🔄+Advanced+agentic+loop+engineering;🔌+MCP+server+architecture+%26+orchestration;📐+Scalable+multi‑agent+systems;🤝+Open‑source+agentic+AI+tooling)](https://git.io/typing-svg)
+
+</div>
+
+---
+
 ## 🛠️ Tech Stack
 
 **🤖 AI / LLM Engineering**
@@ -105,7 +115,53 @@
 
 ---
 
-## 🏆 Certifications
+## 🏆 GitHub Trophies
+
+<div align="center">
+
+[![trophy](https://github-profile-trophy.vercel.app/?username=Noor-ul-ain001&theme=tokyonight&no-frame=true&row=2&column=4&margin-w=15&margin-h=15)](https://github.com/ryo-ma/github-profile-trophy)
+
+</div>
+
+---
+
+## 🐍 Contribution Snake
+
+<div align="center">
+
+![snake gif](https://github.com/Noor-ul-ain001/Noor-ul-ain001/blob/output/github-contribution-grid-snake-dark.svg?raw=true)
+
+</div>
+
+> *Note: The snake animation is generated automatically from your contribution graph. Make sure you have the workflow set up.*
+
+---
+
+## 📊 Weekly Development Breakdown (WakaTime)
+
+<div align="center">
+
+[![Wakatime](https://github-readme-stats.vercel.app/api/wakatime?username=Noor-ul-ain001&layout=compact&theme=tokyonight&hide_border=true&bg_color=080818&title_color=a855f7&text_color=e2e8f0)](https://wakatime.com/@Noor-ul-ain001)
+
+</div>
+
+*If you don't use WakaTime, you can remove this section or replace it with a different metric.*
+
+---
+
+## 🎧 Now Playing
+
+<div align="center">
+
+[![Spotify](https://novatorem.vercel.app/api/spotify?background_color=080818&border_color=a855f7)](https://open.spotify.com/user/your-username)
+
+</div>
+
+> *Replace the username with your own to show your currently playing track.*
+
+---
+
+## 🏅 Certifications
 
 | 🎓 Issuer | 📜 Certification |
 |---|---|
@@ -117,11 +173,22 @@
 
 ---
 
-## 🔭 Currently Exploring
+## 💬 Random Dev Quote
 
 <div align="center">
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=2000&pause=500&color=EC4899&center=true&vCenter=true&width=600&lines=🔄+Advanced+agentic+loop+engineering;🔌+MCP+server+architecture+%26+orchestration;📐+Scalable+multi‑agent+systems;🤝+Open‑source+agentic+AI+tooling)](https://git.io/typing-svg)
+[![Readme Quotes](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight&quote=Code%20is%20like%20humor.%20When%20you%20have%20to%20explain%20it,%20it%E2%80%99s%20bad.&author=Unknown)](https://github.com/piyushsuthar/github-readme-quotes)
+
+</div>
+
+---
+
+## ☕ Support
+
+<div align="center">
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/yourusername)
+[![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/yourusername)
 
 </div>
 
