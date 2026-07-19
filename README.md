@@ -13,8 +13,6 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-noor--portfolio-A855F7?style=for-the-badge&logo=vercel&logoColor=white&labelColor=A855F7&color=A855F7)](https://noor-portfolio-steel.vercel.app)
 [![Email](https://img.shields.io/badge/Email-aina25239@gmail.com-EC4899?style=for-the-badge&logo=gmail&logoColor=white&labelColor=EC4899&color=EC4899)](mailto:aina25239@gmail.com)
 
-![Profile Views](https://komarev.com/ghpvc/?username=Noor-ul-ain001&color=a855f7&style=flat-square&label=Profile+Views)
-![GitHub followers](https://img.shields.io/github/followers/Noor-ul-ain001?color=06b6d4&style=flat-square&logo=github&label=Followers)
 
 ---
 
