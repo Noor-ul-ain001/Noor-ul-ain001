@@ -1,0 +1,526 @@
+{
+ "generated": "2026-10-20",
+ "prs": [
+  {
+   "repo": "github/spec-kit",
+   "number": 4572,
+   "title": "fix(workflows): stop list-literal-then-index expressions silently corrupting",
+   "date": "2026-09-22",
+   "url": "https://github.com/github/spec-kit/pull/4572"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4570,
+   "title": "fix(integrations): stop frontmatter injection gluing onto a missing trailing newline",
+   "date": "2026-09-22",
+   "url": "https://github.com/github/spec-kit/pull/4570"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4325,
+   "title": "fix(workflows): reject a non-integer or out-of-range current_step_index in RunState resume",
+   "date": "2026-09-21",
+   "url": "https://github.com/github/spec-kit/pull/4325"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4323,
+   "title": "fix(extensions): ignore non-mapping extension.yml config section",
+   "date": "2026-09-21",
+   "url": "https://github.com/github/spec-kit/pull/4323"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4337,
+   "title": "fix(events): cap stdin in the generated dispatcher, not just the CLI command",
+   "date": "2026-09-10",
+   "url": "https://github.com/github/spec-kit/pull/4337"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4321,
+   "title": "fix(workflows): reject falsy non-mapping step.yml in step add",
+   "date": "2026-09-08",
+   "url": "https://github.com/github/spec-kit/pull/4321"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4320,
+   "title": "fix(presets): reject falsy non-mapping catalog config shapes",
+   "date": "2026-09-03",
+   "url": "https://github.com/github/spec-kit/pull/4320"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4340,
+   "title": "fix(events): stop falling back to a fake \"pwsh\" argv when no launcher exists",
+   "date": "2026-08-28",
+   "url": "https://github.com/github/spec-kit/pull/4340"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4318,
+   "title": "fix(bundler): reject non-string catalog entry tag members",
+   "date": "2026-08-28",
+   "url": "https://github.com/github/spec-kit/pull/4318"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4341,
+   "title": "fix(presets): validate catalog URL port, not just hostname",
+   "date": "2026-08-27",
+   "url": "https://github.com/github/spec-kit/pull/4341"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4326,
+   "title": "fix(events): stop `event run` crashing on every piped stdin payload",
+   "date": "2026-08-26",
+   "url": "https://github.com/github/spec-kit/pull/4326"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4191,
+   "title": "fix(presets): reject duplicate provides.templates name+type entries",
+   "date": "2026-08-20",
+   "url": "https://github.com/github/spec-kit/pull/4191"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4190,
+   "title": "fix(bundler): decode a downloaded (non-zip) bundle manifest as UTF-8",
+   "date": "2026-08-20",
+   "url": "https://github.com/github/spec-kit/pull/4190"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4189,
+   "title": "fix(utils): narrow bare except Exception in merge_json_files",
+   "date": "2026-08-19",
+   "url": "https://github.com/github/spec-kit/pull/4189"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4188,
+   "title": "fix(powershell): stop Out-Null swallowing setup-tasks AVAILABLE_DOCS lines",
+   "date": "2026-08-19",
+   "url": "https://github.com/github/spec-kit/pull/4188"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4187,
+   "title": "fix(integrations): report a falsy non-mapping integration descriptor as a shape error",
+   "date": "2026-08-19",
+   "url": "https://github.com/github/spec-kit/pull/4187"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4023,
+   "title": "fix(bundle): escape Rich markup in bundle CLI error and status output",
+   "date": "2026-08-10",
+   "url": "https://github.com/github/spec-kit/pull/4023"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4020,
+   "title": "fix(presets): skip an unreadable restore source in `preset remove`",
+   "date": "2026-08-10",
+   "url": "https://github.com/github/spec-kit/pull/4020"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4013,
+   "title": "fix(bundle): wrap malformed YAML in a local .zip bundle manifest",
+   "date": "2026-08-07",
+   "url": "https://github.com/github/spec-kit/pull/4013"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 4011,
+   "title": "fix(integrations): wrap a non-UTF-8 catalog response",
+   "date": "2026-08-07",
+   "url": "https://github.com/github/spec-kit/pull/4011"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3999,
+   "title": "fix(workflows): handle an unreadable run state in `workflow status`",
+   "date": "2026-08-06",
+   "url": "https://github.com/github/spec-kit/pull/3999"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3998,
+   "title": "fix(extensions): start fresh on a non-UTF-8 extension registry",
+   "date": "2026-08-06",
+   "url": "https://github.com/github/spec-kit/pull/3998"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3938,
+   "title": "fix(archives): wrap the bare EOFError a truncated tar.gz raises",
+   "date": "2026-08-05",
+   "url": "https://github.com/github/spec-kit/pull/3938"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3980,
+   "title": "fix(manifests): reject non-string requires.speckit_version",
+   "date": "2026-08-04",
+   "url": "https://github.com/github/spec-kit/pull/3980"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3943,
+   "title": "fix(manifests): reject non-string metadata instead of crashing on it",
+   "date": "2026-08-03",
+   "url": "https://github.com/github/spec-kit/pull/3943"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3912,
+   "title": "fix(workflows): reject a retry gate whose verdict enum forbids the reset value",
+   "date": "2026-07-31",
+   "url": "https://github.com/github/spec-kit/pull/3912"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3879,
+   "title": "fix: escape Rich markup in `workflow resolve` output",
+   "date": "2026-07-31",
+   "url": "https://github.com/github/spec-kit/pull/3879"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3872,
+   "title": "fix(scripts): use a .NET Framework-safe trim in the PowerShell init-dir resolver",
+   "date": "2026-07-30",
+   "url": "https://github.com/github/spec-kit/pull/3872"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3865,
+   "title": "fix(workflows): guard the shell step's timeout check against OverflowError",
+   "date": "2026-07-29",
+   "url": "https://github.com/github/spec-kit/pull/3865"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3847,
+   "title": "fix(workflows): validate prompt step 'timeout' like the shell step",
+   "date": "2026-07-29",
+   "url": "https://github.com/github/spec-kit/pull/3847"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3826,
+   "title": "fix(presets): escape installed preset metadata in Rich output",
+   "date": "2026-07-29",
+   "url": "https://github.com/github/spec-kit/pull/3826"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3770,
+   "title": "fix(workflows,extensions): tolerate non-list catalog tags in search/info display",
+   "date": "2026-07-28",
+   "url": "https://github.com/github/spec-kit/pull/3770"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3769,
+   "title": "fix(presets): tolerate non-string and non-list catalog fields in preset search/info",
+   "date": "2026-07-28",
+   "url": "https://github.com/github/spec-kit/pull/3769"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3747,
+   "title": "fix(extensions): tolerate non-string catalog name in display-name lookup",
+   "date": "2026-07-27",
+   "url": "https://github.com/github/spec-kit/pull/3747"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3746,
+   "title": "fix(extensions): tolerate non-string tags in catalog search",
+   "date": "2026-07-27",
+   "url": "https://github.com/github/spec-kit/pull/3746"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3743,
+   "title": "fix(presets): coerce non-string catalog tags before joining",
+   "date": "2026-07-27",
+   "url": "https://github.com/github/spec-kit/pull/3743"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3738,
+   "title": "fix: escape Rich markup in catalog list output",
+   "date": "2026-07-27",
+   "url": "https://github.com/github/spec-kit/pull/3738"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3731,
+   "title": "fix(workflows): escape remaining untrusted fields in `workflow info`",
+   "date": "2026-07-27",
+   "url": "https://github.com/github/spec-kit/pull/3731"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 2626,
+   "title": "Update AGENTS.md",
+   "date": "2026-07-27",
+   "url": "https://github.com/github/spec-kit/pull/2626"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3715,
+   "title": "fix(github-http): return None on malformed host in resolve_github_release_asset_api_url",
+   "date": "2026-07-24",
+   "url": "https://github.com/github/spec-kit/pull/3715"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3651,
+   "title": "fix(cli): guard lazy .hostname ValueError in extension/preset add --from",
+   "date": "2026-07-23",
+   "url": "https://github.com/github/spec-kit/pull/3651"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3644,
+   "title": "fix(bundler): guard lazy .hostname ValueError in catalog add_source",
+   "date": "2026-07-22",
+   "url": "https://github.com/github/spec-kit/pull/3644"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3597,
+   "title": "fix(workflows): reject a non-string 'integration'/'model' in command & prompt steps",
+   "date": "2026-07-22",
+   "url": "https://github.com/github/spec-kit/pull/3597"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3601,
+   "title": "fix(workflows): reject non-list input 'enum' instead of crashing",
+   "date": "2026-07-21",
+   "url": "https://github.com/github/spec-kit/pull/3601"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3596,
+   "title": "fix(workflows): reject a non-string 'command' in command-step",
+   "date": "2026-07-21",
+   "url": "https://github.com/github/spec-kit/pull/3596"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3595,
+   "title": "fix(workflows): fail gate step loudly on a malformed 'options'",
+   "date": "2026-07-21",
+   "url": "https://github.com/github/spec-kit/pull/3595"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3577,
+   "title": "fix(extensions,presets): surface clean error on malformed download URL",
+   "date": "2026-07-21",
+   "url": "https://github.com/github/spec-kit/pull/3577"
+  },
+  {
+   "repo": "UmmeHabiba1312/HungerMap-PK-Food-Insecurity-Reporting-Resource-Connector",
+   "number": 3,
+   "title": "Add contact/stats backend routers, dashboard components, and API client",
+   "date": "2026-07-18",
+   "url": "https://github.com/UmmeHabiba1312/HungerMap-PK-Food-Insecurity-Reporting-Resource-Connector/pull/3"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3582,
+   "title": "fix(workflows): reject a non-string prompt in prompt-step validate()",
+   "date": "2026-07-17",
+   "url": "https://github.com/github/spec-kit/pull/3582"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3579,
+   "title": "fix(workflows): fail fan-in loudly on a non-string wait_for entry",
+   "date": "2026-07-17",
+   "url": "https://github.com/github/spec-kit/pull/3579"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3537,
+   "title": "fix(workflows): fail fan-out loudly on a truthy non-mapping step template",
+   "date": "2026-07-17",
+   "url": "https://github.com/github/spec-kit/pull/3537"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3515,
+   "title": "fix(workflows): fail if/switch steps on non-list branch instead of crashing",
+   "date": "2026-07-16",
+   "url": "https://github.com/github/spec-kit/pull/3515"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3538,
+   "title": "fix(extensions/git): reject negative -Number in create-new-feature-branch.ps1",
+   "date": "2026-07-15",
+   "url": "https://github.com/github/spec-kit/pull/3538"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3522,
+   "title": "fix(workflows): raise a clear error, not a cryptic crash, on non-string filter args",
+   "date": "2026-07-15",
+   "url": "https://github.com/github/spec-kit/pull/3522"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3519,
+   "title": "fix(workflows): fail while/do-while steps on non-list steps instead of crashing",
+   "date": "2026-07-14",
+   "url": "https://github.com/github/spec-kit/pull/3519"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3484,
+   "title": "fix(workflows): raise catalog error, not raw ValueError, on a malformed catalog URL",
+   "date": "2026-07-14",
+   "url": "https://github.com/github/spec-kit/pull/3484"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3468,
+   "title": "fix(workflows): evaluate 'in'/'not in' safely on a non-iterable right operand (#3447)",
+   "date": "2026-07-14",
+   "url": "https://github.com/github/spec-kit/pull/3468"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3485,
+   "title": "fix(integrations): declare kiro-cli multi-install safe (#3471)",
+   "date": "2026-07-13",
+   "url": "https://github.com/github/spec-kit/pull/3485"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3482,
+   "title": "fix(workflows): fail fan-in step on non-list wait_for instead of crashing",
+   "date": "2026-07-13",
+   "url": "https://github.com/github/spec-kit/pull/3482"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3481,
+   "title": "fix(workflows): fail switch step on non-mapping cases instead of crashing",
+   "date": "2026-07-13",
+   "url": "https://github.com/github/spec-kit/pull/3481"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3466,
+   "title": "fix(integrations): exit cleanly on unbalanced quote in --integration-options (#3457)",
+   "date": "2026-07-13",
+   "url": "https://github.com/github/spec-kit/pull/3466"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3328,
+   "title": "feat(workflows): make shell step timeout configurable (#3327)",
+   "date": "2026-07-13",
+   "url": "https://github.com/github/spec-kit/pull/3328"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3412,
+   "title": "fix(git-ext): honor explicit -Number 0 in PowerShell branch creation (parity with bash)",
+   "date": "2026-07-10",
+   "url": "https://github.com/github/spec-kit/pull/3412"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3301,
+   "title": "fix(agent-context): discover nested plan.md in scoped layouts (#3024)",
+   "date": "2026-07-10",
+   "url": "https://github.com/github/spec-kit/pull/3301"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3339,
+   "title": "fix(workflows): apply chained expression filters left-to-right",
+   "date": "2026-07-09",
+   "url": "https://github.com/github/spec-kit/pull/3339"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3320,
+   "title": "fix(scripts): resolve invoke_separator by parse success, not python3 availability (#3304)",
+   "date": "2026-07-09",
+   "url": "https://github.com/github/spec-kit/pull/3320"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3335,
+   "title": "fix(workflows): match gate reject option case-insensitively",
+   "date": "2026-07-06",
+   "url": "https://github.com/github/spec-kit/pull/3335"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3287,
+   "title": "fix(extensions): resolve core-command dirs via _assets helpers (#3274)",
+   "date": "2026-07-01",
+   "url": "https://github.com/github/spec-kit/pull/3287"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3229,
+   "title": "fix: fall back to feature dir basename for empty CURRENT_BRANCH (#3026)",
+   "date": "2026-07-01",
+   "url": "https://github.com/github/spec-kit/pull/3229"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3228,
+   "title": "fix: interpolate multi-expression templates instead of returning None (#3208)",
+   "date": "2026-07-01",
+   "url": "https://github.com/github/spec-kit/pull/3228"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3227,
+   "title": "fix: reject host-less catalog URLs in base and preset validators (#3209)",
+   "date": "2026-06-30",
+   "url": "https://github.com/github/spec-kit/pull/3227"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3190,
+   "title": "fix: stop check-prerequisites --paths-only from writing feature.json (#3025)",
+   "date": "2026-06-30",
+   "url": "https://github.com/github/spec-kit/pull/3190"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3194,
+   "title": "docs: document integration `search`/`info`/`scaffold` subcommands (#3174)",
+   "date": "2026-06-29",
+   "url": "https://github.com/github/spec-kit/pull/3194"
+  },
+  {
+   "repo": "github/spec-kit",
+   "number": 3193,
+   "title": "docs: remove Cursor from `specify check` agent list (#3178)",
+   "date": "2026-06-29",
+   "url": "https://github.com/github/spec-kit/pull/3193"
+  }
+ ],
+ "open": 2,
+ "repos": 89,
+ "followers": 19
+}

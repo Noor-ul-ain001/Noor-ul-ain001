@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="40" viewBox="0 0 1200 40" fill="none">
+<style></style>
+<defs>
+<pattern id="vdots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#fff" fill-opacity=".05"/></pattern>
+<linearGradient id="vhair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd23f" stop-opacity=".7"/><stop offset=".35" stop-color="#ff3d8b" stop-opacity=".12"/><stop offset=".65" stop-color="#2de2e6" stop-opacity=".12"/><stop offset="1" stop-color="#ff3d8b" stop-opacity=".7"/>
+<animateTransform attributeName="gradientTransform" type="rotate" values="0 .5 .5;360 .5 .5" dur="8s" repeatCount="indefinite"/></linearGradient>
+<linearGradient id="vaur" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd23f"/><stop offset=".5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient>
+<linearGradient id="vscan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff3d8b" stop-opacity="0"/><stop offset=".5" stop-color="#ff3d8b" stop-opacity=".07"/><stop offset="1" stop-color="#ff3d8b" stop-opacity="0"/></linearGradient>
+<radialGradient id="vglowM" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff3d8b" stop-opacity=".3"/><stop offset="1" stop-color="#ff3d8b" stop-opacity="0"/></radialGradient>
+<radialGradient id="vglowT" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2de2e6" stop-opacity=".25"/><stop offset="1" stop-color="#2de2e6" stop-opacity="0"/></radialGradient>
+<linearGradient id="vshine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".09"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<filter id="vblur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="vneon" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<path d="M0 20 Q50 8 100 20 Q150 32 200 20 Q250 8 300 20 Q350 32 400 20 Q450 8 500 20 Q550 32 600 20 Q650 8 700 20 Q750 32 800 20 Q850 8 900 20 Q950 32 1000 20 Q1050 8 1100 20 Q1150 32 1200 20" stroke="url(#vaur)" stroke-opacity=".5" stroke-width="2" stroke-dasharray="6 8"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.2s" repeatCount="indefinite"/></path>
+<circle r="4" fill="#fff" filter="url(#vneon)"><animateMotion path="M0 20 Q50 8 100 20 Q150 32 200 20 Q250 8 300 20 Q350 32 400 20 Q450 8 500 20 Q550 32 600 20 Q650 8 700 20 Q750 32 800 20 Q850 8 900 20 Q950 32 1000 20 Q1050 8 1100 20 Q1150 32 1200 20" dur="6s" repeatCount="indefinite"/></circle>
+<circle r="3" fill="#ffd23f" filter="url(#vneon)"><animateMotion path="M0 20 Q50 8 100 20 Q150 32 200 20 Q250 8 300 20 Q350 32 400 20 Q450 8 500 20 Q550 32 600 20 Q650 8 700 20 Q750 32 800 20 Q850 8 900 20 Q950 32 1000 20 Q1050 8 1100 20 Q1150 32 1200 20" dur="6s" begin="-3s" repeatCount="indefinite"/></circle>
+</svg>
