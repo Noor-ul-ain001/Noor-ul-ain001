@@ -108,9 +108,9 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 | 🟢 live | **Aurelia Parfum** | React · gsap | [aurelia-parfum.vercel.app](https://aurelia-parfum.vercel.app) |
 | 🟢 live | **Palmo Coconut** | Three.js · gsap | [palmo-coconut.vercel.app](https://palmo-coconut.vercel.app) |
 | 🟢 live | **DriveHouse Motors** | React | [velox-motors-app-pied.vercel.app](https://velox-motors-app-pied.vercel.app) |
-| 🟢 live | **Smash Burger** | Gsap scroll | [smash-burger-landing.vercel.app](https://smash-burger-landing.vercel.app) |
+ 
 | 🟢 live | **Scroll Chapters** | Next.js · lenis | [scroll-video-chapters.vercel.app](https://scroll-video-chapters.vercel.app) |
-| 🟢 live | **Nooritoo Shop** | E-commerce | [noorito-ecom.vercel.app](https://noorito-ecom.vercel.app) |
+
 | 🟢 live | **iPhone Website** | Product landing | [iphone-website-sepia.vercel.app](https://iphone-website-sepia.vercel.app) |
 <!-- PROJECTS:END -->
 
