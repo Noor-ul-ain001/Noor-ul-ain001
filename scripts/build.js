@@ -47,8 +47,8 @@ async function loadStats() {
 const b64 = f => fs.readFileSync(path.join(A, f)).toString('base64');
 const FONT_D = b64('display.woff2'), FONT_M = b64('mono.woff2');
 const ICON = n => fs.readFileSync(path.join(A, 'icons', n + '.svg'), 'utf8').match(/ d="([^"]+)"/)[1];
-// "synthwave sunset": gold -> orange -> magenta, with a teal counter-accent
-const C = { bg: '#0b0716', tx: '#f6f0ff', mu: '#ab9cc8', dim: '#6e6290', y: '#ffd23f', o: '#ff8a3d', m: '#ff3d8b', t: '#2de2e6', skin: '#eab896', hair: '#1c1a2b' };
+// "acid terminal": lime -> cyan -> electric blue, with a hot-pink counter-accent
+const C = { bg: '#05080e', tx: '#ecfdf5', mu: '#8ea4b8', dim: '#566a80', y: '#c6ff3d', o: '#2ee6ff', m: '#5b7cff', t: '#ff5ea8', skin: '#eab896', hair: '#1c1a2b' };
 const BRAND = {
   python: '#4B8BBE', typescript: '#3178C6', react: '#61DAFB', nextdotjs: '#ffffff', tailwindcss: '#38BDF8', fastapi: '#05998B',
   nodedotjs: '#5FA04E', postgresql: '#6B9BD1', docker: '#2496ED', git: '#F05032', githubactions: '#2088FF', vercel: '#ffffff',
@@ -78,7 +78,8 @@ function head(p, W, H, o = {}) {
 <radialGradient id="${p}glowT" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="${C.t}" stop-opacity=".25"/><stop offset="1" stop-color="${C.t}" stop-opacity="0"/></radialGradient>
 <linearGradient id="${p}shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".09"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <filter id="${p}blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
-<filter id="${p}neon" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+<filter id="${p}neon" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="${p}soft" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="45"/></filter>`;
 }
 // card with rotating hairline border, drifting particles and a slow scanline
 let cardN = 0;
@@ -89,8 +90,13 @@ function card(p, x, y, w, h, o = {}) {
     const px = r2(x + 10 + rand() * (w - 20)), py = r2(y + h * (.4 + rand() * .6)), d = r2(6 + rand() * 7), c = [C.y, C.m, C.t][k % 3];
     fx += `<circle cx="${px}" cy="${py}" r="${r2(.8 + rand() * 1.4)}" fill="${c}" opacity="0"><animateTransform attributeName="transform" type="translate" values="0 0;${r2(rand() * 20 - 10)} -${r2(h * .5)}" dur="${d}s" begin="-${r2(rand() * d)}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;.7;0" dur="${d}s" begin="-${r2(rand() * d)}s" repeatCount="indefinite"/></circle>`;
   }
+  // drifting aurora blobs behind the content
+  const R = Math.min(w, h) * .45;
+  const blobs = [[C.y, .2, .3, 18], [C.m, .8, .7, 23], [C.t, .55, .1, 29]].map(([c, fx0, fy0, d], k) =>
+    `<circle cx="${r2(x + w * fx0)}" cy="${r2(y + h * fy0)}" r="${r2(R)}" fill="${c}" opacity="${k === 2 ? .07 : .11}" filter="url(#${p}soft)"><animateTransform attributeName="transform" type="translate" values="0 0;${r2(w * (k % 2 ? -.25 : .25))} ${r2(h * .2)};${r2(w * (k % 2 ? .1 : -.1))} ${r2(-h * .15)};0 0" dur="${d}s" repeatCount="indefinite"/></circle>`).join('');
   return `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="22"/></clipPath>
 <rect x="${x + .5}" y="${y + .5}" width="${w - 1}" height="${h - 1}" rx="22" fill="${C.bg}"/>
+<g clip-path="url(#${id})">${blobs}</g>
 <rect x="${x + .5}" y="${y + .5}" width="${w - 1}" height="${h - 1}" rx="22" fill="url(#${p}dots)"/>
 <g clip-path="url(#${id})">${fx}<rect x="${x}" y="${y - 80}" width="${w}" height="80" fill="url(#${p}scan)"><animateTransform attributeName="transform" type="translate" values="0 0;0 ${h + 80}" dur="7s" repeatCount="indefinite"/></rect></g>
 <rect x="${x + .5}" y="${y + .5}" width="${w - 1}" height="${h - 1}" rx="22" stroke="url(#${p}hair)" stroke-width="1.3"/>`;
@@ -144,11 +150,11 @@ function avatarHead(o = {}) {
 <path d="M-47 -2 C-47 -68 47 -68 47 -2" stroke="${C.t}" stroke-width="6" stroke-linecap="round"/>
 <rect x="-55" y="-12" width="13" height="28" rx="6" fill="${C.t}"/><rect x="42" y="-12" width="13" height="28" rx="6" fill="${C.t}"/>`;
 }
-const hoodieDef = p => `<linearGradient id="${p}hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.m}"/><stop offset="1" stop-color="#8a1150"/></linearGradient>`;
-const ARM = '#d42a72';
+const hoodieDef = p => `<linearGradient id="${p}hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.m}"/><stop offset="1" stop-color="#2333a8"/></linearGradient>`;
+const ARM = '#3f5ff0';
 const torso = (p, bottom = 140) => `<path d="M-88 ${bottom} C-88 85 -62 62 0 60 C62 62 88 85 88 ${bottom} Z" fill="url(#${p}hood)"/>
 <rect x="-12" y="30" width="24" height="34" rx="8" fill="${C.skin}"/>
-<path d="M-26 62 Q0 86 26 62" stroke="#ffb3d1" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M-26 62 Q0 86 26 62" stroke="#b7c6ff" stroke-width="4" fill="none" stroke-linecap="round"/>
 <path d="M-10 72 L-12 100 M10 72 L12 100" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>`;
 
 /* ------------------------------------------------------------------ hero */
@@ -163,32 +169,35 @@ function hero(S) {
 <clipPath id="${p}vf"><rect x="680" y="40" width="470" height="360" rx="18"/></clipPath>
 <radialGradient id="${p}melt" cx=".5" cy=".48" r=".62"><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
 <mask id="${p}mm"><rect x="680" y="40" width="470" height="360" fill="url(#${p}melt)"/></mask>
-<linearGradient id="${p}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a0b2e"/><stop offset=".7" stop-color="#3d0f3f"/><stop offset="1" stop-color="#14081f"/></linearGradient>
+<linearGradient id="${p}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04121a"/><stop offset=".7" stop-color="#0a2a3a"/><stop offset="1" stop-color="#03080d"/></linearGradient>
 <linearGradient id="${p}sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.y}"/><stop offset=".55" stop-color="${C.o}"/><stop offset="1" stop-color="${C.m}"/></linearGradient>
-<mask id="${p}sunm"><rect x="780" y="60" width="270" height="250" fill="#fff"/>
-<g><animateTransform attributeName="transform" type="translate" values="0 0;0 14" dur="1.6s" repeatCount="indefinite"/>
-${[0, 1, 2, 3, 4, 5].map(k => `<rect x="780" y="${172 + k * 14}" width="270" height="${2 + k * 1.3}" fill="#000"/>`).join('')}</g></mask>
 </defs>
 ${card(p, 0, 0, W, H, { particles: 22 })}
 <circle cx="830" cy="210" r="280" fill="url(#${p}glowM)"/>`;
   s += `
 <g><rect x="56" y="52" width="196" height="30" rx="15" fill="${C.t}" fill-opacity=".08" stroke="${C.t}" stroke-opacity=".45"/>
 ${pulseDot(75, 67, '#34d399')}
-<text x="90" y="71.5" class="m" font-size="12" letter-spacing="1.6" fill="#a5fbfd">OPEN TO COLLABS</text></g>
+<text x="90" y="71.5" class="m" font-size="12" letter-spacing="1.6" fill="#ffd1ea">OPEN TO COLLABS</text></g>
 <g clip-path="url(#${p}type)"><text x="56" y="128" class="m" font-size="20" fill="${C.mu}">Hi there, I'm</text></g>
 <rect x="216" y="111" width="10" height="21" fill="${C.o}"><animate attributeName="opacity" values="1;0;1" dur="1s" calcMode="discrete" keyTimes="0;.5;1" repeatCount="indefinite"/></rect>
 <g mask="url(#${p}rise)"><g><animateTransform attributeName="transform" type="translate" values="0 26;0 26;0 0" keyTimes="0;.35;1" dur="1.4s" fill="freeze"/>
-<text x="52" y="218" class="d" font-size="84" letter-spacing="-2" fill="${C.t}" opacity="0">Noor ul Ain<animate attributeName="opacity" values="0;0;.8;0;.6;0;0" keyTimes="0;.86;.87;.88;.89;.9;1" dur="5s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="-4 0;-4 0;5 -1;-3 1;-4 0" keyTimes="0;.86;.87;.89;1" dur="5s" repeatCount="indefinite"/></text>
-<text x="52" y="218" class="d" font-size="84" letter-spacing="-2" fill="url(#${p}name)">Noor ul Ain<animateTransform attributeName="transform" type="translate" values="0 0;0 0;3 0;-2 0;0 0;0 0" keyTimes="0;.86;.87;.88;.9;1" dur="5s" repeatCount="indefinite"/></text></g></g>`;
+<text x="52" y="218" class="d" font-size="80" letter-spacing="-2" fill="${C.t}" opacity="0">Noor ul Ain<animate attributeName="opacity" values="0;0;.8;0;.6;0;0" keyTimes="0;.86;.87;.88;.89;.9;1" dur="5s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="-4 0;-4 0;5 -1;-3 1;-4 0" keyTimes="0;.86;.87;.89;1" dur="5s" repeatCount="indefinite"/></text>
+<text x="52" y="218" class="d" font-size="80" letter-spacing="-2" fill="url(#${p}name)">Noor ul Ain<animate attributeName="letter-spacing" values="28;28;-2" keyTimes="0;.3;1" keySplines="0 0 1 1;.2 .9 .3 1" calcMode="spline" dur="1.6s" fill="freeze"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;3 0;-2 0;0 0;0 0" keyTimes="0;.86;.87;.88;.9;1" dur="5s" repeatCount="indefinite"/></text></g></g>`;
   const roles = ['Agentic AI Engineer', 'spec-kit Contributor', 'MCP Workflow Builder', 'Full-Stack Developer'];
+  // typewriter: each role types in, holds, then deletes itself
+  s += `<text x="56" y="266" class="m" font-size="20" fill="${C.o}">&gt;</text>`;
   roles.forEach((r, i) => {
-    const t = slot(i, roles.length, 1, 0, .025);
-    s += `<text x="56" y="266" class="m" font-size="20" fill="${C.tx}" opacity="${i ? 0 : 1}"><tspan fill="${C.o}">&gt; </tspan>${esc(r)}<animate attributeName="opacity" values="${t.v}" keyTimes="${t.kt}" dur="12s" repeatCount="indefinite"/></text>`;
+    const w = r.length * 12, a = i / 4, b = (i + 1) / 4, f = n => r2(n * 1000) / 1000;
+    const kt = i === 0 ? [0, .1, .2, .24, 1] : [0, f(a), f(a + .1), f(b - .05), f(b - .01), 1];
+    const vw = i === 0 ? [0, w, w, 0, 0] : [0, 0, w, w, 0, 0];
+    s += `<clipPath id="${p}role${i}"><rect x="80" y="244" width="${i ? 0 : w}" height="30"><animate attributeName="width" values="${vw.join(';')}" keyTimes="${kt.join(';')}" dur="12s" repeatCount="indefinite"/></rect></clipPath>
+<g clip-path="url(#${p}role${i})"><text x="80" y="266" class="m" font-size="20" fill="${C.tx}">${esc(r)}</text></g>
+<rect x="${80 + (i ? 0 : w) + 2}" y="250" width="10" height="20" fill="${C.y}" opacity="${i ? 0 : 1}"><animate attributeName="x" values="${vw.map(v => 82 + v).join(';')}" keyTimes="${kt.join(';')}" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="${i === 0 ? '1;1;0;0;1' : '0;0;1;1;0;0'}" keyTimes="${i === 0 ? '0;.24;.245;.999;1' : [0, f(a), f(a + .005), f(b - .01), f(b - .005), 1].join(';')}" dur="12s" repeatCount="indefinite"/></rect>`;
   });
   const up = S.prs.length;
   s += `
-<text x="56" y="310" class="m" font-size="14" fill="#dccfee">I build multi-agent systems, RAG pipelines &amp; MCP</text>
-<text x="56" y="332" class="m" font-size="14" fill="#dccfee">workflows — from first spec to production deploy.</text>
+<text x="56" y="310" class="m" font-size="14" fill="#cfe4ec">I build multi-agent systems, RAG pipelines &amp; MCP</text>
+<text x="56" y="332" class="m" font-size="14" fill="#cfe4ec">workflows — from first spec to production deploy.</text>
 <g class="m" font-size="13" fill="${C.mu}">
 <path d="M64 366 c-5 0 -8 4 -8 8 c0 6 8 13 8 13 s8 -7 8 -13 c0 -4 -3 -8 -8 -8 z" stroke="${C.m}" stroke-width="1.6"/><circle cx="64" cy="374" r="2.4" fill="${C.m}"/>
 <text x="80" y="383">Karachi, Pakistan</text>
@@ -197,7 +206,13 @@ ${pulseDot(75, 67, '#34d399')}
 <circle cx="440" cy="369" r="3" stroke="${C.t}" stroke-width="1.6"/><circle cx="440" cy="385" r="3" stroke="${C.t}" stroke-width="1.6"/><circle cx="452" cy="377" r="3" stroke="${C.t}" stroke-width="1.6"/><path d="M440 372 v10 M443 370 q9 0 9 4" stroke="${C.t}" stroke-width="1.6"/>
 <text x="464" y="383">${up} merged PRs</text>
 </g>`;
-  // the animated "video": synthwave sunset, perspective grid, waving coder
+  // the animated "video": code rain, holographic globe, perspective grid, waving coder
+  const glyphs = '01{}<>/=;$#:+*', rr = rng(11);
+  let rain = '';
+  for (let k = 0; k < 22; k++) {
+    const x = r2(694 + k * 21), d = r2(3 + rr() * 4), col = Array.from({ length: 9 }, () => glyphs[Math.floor(rr() * glyphs.length)]);
+    rain += `<g opacity=".5"><animateTransform attributeName="transform" type="translate" values="0 -150;0 330" dur="${d}s" begin="-${r2(rr() * d)}s" repeatCount="indefinite"/>${col.map((g, j) => `<text x="${x}" y="${40 + j * 15}" class="m" font-size="12" fill="${j === 8 ? '#fff' : C.y}" fill-opacity="${r2(.15 + j * .1)}">${esc(g)}</text>`).join('')}</g>`;
+  }
   let grid = '';
   for (let k = -7; k <= 7; k++) grid += `<line x1="${915 + k * 16}" y1="300" x2="${915 + k * 110}" y2="420" stroke="${C.m}" stroke-opacity=".45"/>`;
   for (let k = 0; k < 6; k++) grid += `<line x1="680" y1="300" x2="1150" y2="300" stroke="${C.m}" stroke-opacity=".5"><animateTransform attributeName="transform" type="translate" values="0 0;0 110" keySplines=".6 0 1 1" calcMode="spline" dur="3s" begin="-${k * .5}s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".15;.7" dur="3s" begin="-${k * .5}s" repeatCount="indefinite"/></line>`;
@@ -211,12 +226,18 @@ ${pulseDot(75, 67, '#34d399')}
   s += `
 <g clip-path="url(#${p}vf)"><g mask="url(#${p}mm)">
 <rect x="680" y="40" width="470" height="360" fill="url(#${p}sky)"/>${stars}
-<circle cx="915" cy="200" r="100" fill="url(#${p}sun)" mask="url(#${p}sunm)"/>
-<circle cx="915" cy="200" r="120" fill="${C.o}" opacity=".18" filter="url(#${p}blur)"/>
-<rect x="680" y="300" width="470" height="100" fill="#14081f"/>${grid}
+${rain}
+<circle cx="915" cy="190" r="120" fill="${C.o}" opacity=".16" filter="url(#${p}blur)"/>
+<g stroke="${C.o}" stroke-width="1.3" fill="none" opacity=".75">
+<circle cx="915" cy="190" r="100" stroke="url(#${p}sun)"/>
+${[0, 1, 2, 3].map(k => `<ellipse cx="915" cy="190" rx="100" ry="100" stroke-opacity=".55"><animate attributeName="rx" values="100;0;100" dur="6s" begin="-${k * 1.5}s" repeatCount="indefinite"/></ellipse>`).join('')}
+${[-60, -30, 0, 30, 60].map(dy => `<ellipse cx="915" cy="${190 + dy}" rx="${r2(Math.sqrt(10000 - dy * dy))}" ry="${r2(Math.sqrt(10000 - dy * dy) * .16)}" stroke-opacity=".4"/>`).join('')}
+<g><animateTransform attributeName="transform" type="rotate" values="0 915 190;360 915 190" dur="14s" repeatCount="indefinite"/><ellipse cx="915" cy="190" rx="135" ry="24" stroke="${C.y}" stroke-dasharray="4 10" transform="rotate(-18 915 190)"/></g>
+</g>
+<rect x="680" y="300" width="470" height="100" fill="#03080d"/>${grid}
 <g><animate attributeName="opacity" values="1;1;0;1" keyTimes="0;.88;.95;1" dur="4s" repeatCount="indefinite"/>
 <g transform="translate(915,0)">
-<g transform="translate(-205,252)"><rect width="104" height="72" rx="10" fill="#140a24" fill-opacity=".9" stroke="${C.t}" stroke-opacity=".5"/>
+<g transform="translate(-205,252)"><rect width="104" height="72" rx="10" fill="#0a1420" fill-opacity=".9" stroke="${C.t}" stroke-opacity=".5"/>
 <circle cx="12" cy="12" r="3" fill="#f87171"/><circle cx="22" cy="12" r="3" fill="#fbbf24"/><circle cx="32" cy="12" r="3" fill="#34d399"/>${code}
 <animateTransform attributeName="transform" type="translate" values="-205 252;-205 244;-205 252" dur="4s" repeatCount="indefinite"/></g>
 <g transform="translate(-120,150)"><g><animateTransform attributeName="transform" type="scale" values="0;0;1.12;1;1;0;0" keyTimes="0;.08;.16;.2;.78;.84;1" dur="4s" repeatCount="indefinite"/>
@@ -227,10 +248,10 @@ ${pulseDot(75, 67, '#34d399')}
 <g><animateTransform attributeName="transform" type="rotate" values="0 62 84;-22 62 84;6 62 84;-22 62 84;6 62 84;-22 62 84;0 62 84;0 62 84" keyTimes="0;.1;.2;.3;.4;.5;.6;1" dur="4s" repeatCount="indefinite"/>
 <path d="M62 84 L108 14" stroke="${ARM}" stroke-width="24" stroke-linecap="round"/><circle cx="112" cy="6" r="15" fill="${C.skin}"/>
 <path d="M104 -6 v-10 M112 -9 v-12 M120 -6 v-10" stroke="${C.skin}" stroke-width="6" stroke-linecap="round"/></g>
-<rect x="-98" y="88" width="196" height="100" rx="9" fill="#1e1230" stroke="#4a2a5c"/>
+<rect x="-98" y="88" width="196" height="100" rx="9" fill="#0f1c2b" stroke="#24405a"/>
 <g transform="translate(0,138)" stroke="${C.y}" stroke-width="1.8" fill="none"><animate attributeName="opacity" values=".45;1;.45" dur="2s" repeatCount="indefinite"/>
 <ellipse rx="22" ry="8"/><ellipse rx="22" ry="8" transform="rotate(60)"/><ellipse rx="22" ry="8" transform="rotate(-60)"/><circle r="3" fill="${C.y}"/></g>
-<rect x="-210" y="186" width="420" height="16" rx="7" fill="#2a1838"/>
+<rect x="-210" y="186" width="420" height="16" rx="7" fill="#132232"/>
 <g transform="translate(150,152)"><rect width="30" height="34" rx="6" fill="${C.t}"/><path d="M30 8 h6 a7 7 0 0 1 0 14 h-6" stroke="${C.t}" stroke-width="4"/>
 ${[0, 1, 2].map(k => `<path d="M${7 + k * 8} -6 q-4 -6 0 -12 q4 -6 0 -12" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" values="0 4;0 -8" dur="2s" begin="${-k * .6}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="2s" begin="${-k * .6}s" repeatCount="indefinite"/></path>`).join('')}
 </g></g></g></g></g></g>`;
@@ -239,8 +260,8 @@ ${[0, 1, 2].map(k => `<path d="M${7 + k * 8} -6 q-4 -6 0 -12 q4 -6 0 -12" stroke
 <g>${br('M700 88 V60 H728')}${br('M1102 60 H1130 V88')}${br('M700 352 V380 H728')}${br('M1102 380 H1130 V352')}</g>
 <circle cx="722" cy="80" r="5" fill="#ef4444"><animate attributeName="opacity" values="1;0;1" keyTimes="0;.5;1" calcMode="discrete" dur="1.2s" repeatCount="indefinite"/></circle>
 <text x="734" y="84.5" class="m" font-size="12" fill="#fecaca" letter-spacing="1.5">REC</text>
-<text x="1110" y="84.5" text-anchor="end" class="m" font-size="11" fill="#e9d5ff">noor_intro.mp4 · 1080p</text>
-${[0, 1, 2, 3].map(k => { const t = slot(k, 4, 1, 0, 0); return `<text x="722" y="364" class="m" font-size="11" fill="#e9d5ff" opacity="${k ? 0 : 1}">00:00:0${k}<animate attributeName="opacity" calcMode="discrete" values="${t.v}" keyTimes="${t.kt}" dur="4s" repeatCount="indefinite"/></text>`; }).join('')}
+<text x="1110" y="84.5" text-anchor="end" class="m" font-size="11" fill="#d6f5ff">noor_intro.mp4 · 1080p</text>
+${[0, 1, 2, 3].map(k => { const t = slot(k, 4, 1, 0, 0); return `<text x="722" y="364" class="m" font-size="11" fill="#d6f5ff" opacity="${k ? 0 : 1}">00:00:0${k}<animate attributeName="opacity" calcMode="discrete" values="${t.v}" keyTimes="${t.kt}" dur="4s" repeatCount="indefinite"/></text>`; }).join('')}
 <rect x="800" y="358" width="300" height="4" rx="2" fill="#fff" fill-opacity=".18"/>
 <rect x="800" y="358" width="300" height="4" rx="2" fill="url(#${p}aur)"><animate attributeName="width" values="0;300" dur="4s" repeatCount="indefinite"/></rect>
 <circle cx="1100" cy="360" r="5" fill="#fff"><animate attributeName="cx" values="800;1100" dur="4s" repeatCount="indefinite"/></circle>
@@ -255,11 +276,11 @@ function about(S) {
   let s = head(p, W, H) + `
 <linearGradient id="${p}tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.o}" stop-opacity=".3"/><stop offset="1" stop-color="${C.m}" stop-opacity=".3"/></linearGradient>
 <clipPath id="${p}slides"><rect x="636" y="116" width="540" height="214" rx="16"/></clipPath>
-${[['#5a1240', '#160a24'], ['#4a1d0a', '#160a24'], ['#0d4450', '#120a22'], ['#4d3a06', '#160a24']].map(([a, b], i) => `<linearGradient id="${p}s${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`).join('')}
+${[['#163f12', '#0a1420'], ['#0b2f4a', '#0a1420'], ['#26205c', '#0a1420'], ['#4a0f36', '#0a1420']].map(([a, b], i) => `<linearGradient id="${p}s${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`).join('')}
 </defs>
 ${card(p, 0, 0, 588, H)}${card(p, 612, 0, 588, H)}
 ${label(32, 44, '// WHAT I BUILD')}${title(32, 80, 'Agents that actually ship')}
-<rect x="32" y="100" width="524" height="200" rx="12" fill="#140b22" stroke="#fff" stroke-opacity=".08"/>
+<rect x="32" y="100" width="524" height="200" rx="12" fill="#0a1520" stroke="#fff" stroke-opacity=".08"/>
 <path d="M32 130 H556" stroke="#fff" stroke-opacity=".08"/>
 <circle cx="50" cy="115" r="4.5" fill="#f87171"/><circle cx="64" cy="115" r="4.5" fill="#fbbf24"/><circle cx="78" cy="115" r="4.5" fill="#34d399"/>
 <rect x="100" y="106" width="440" height="18" rx="9" fill="#fff" fill-opacity=".05"/>
@@ -277,7 +298,7 @@ ${cursor(r2(116 + (8 + PORTFOLIO.length) * 6.6), 109, 12)}`;
 <circle r="3.5" fill="${C.y}" opacity="0"><animateMotion path="${d}" keyPoints="0;0;1;1" keyTimes="0;${a};${b};1" calcMode="linear" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;${a};${r2(a + .02)};${r2(b - .02)};${b};1" dur="2.5s" repeatCount="indefinite"/></circle>
 <rect x="${x - 50}" y="${y - 16}" width="100" height="32" rx="10" fill="#fff" fill-opacity=".04" stroke="#fff" stroke-opacity=".14"/>
 <rect x="${x - 50}" y="${y - 16}" width="100" height="32" rx="10" stroke="${C.y}" stroke-opacity="0"><animate attributeName="stroke-opacity" values="0;0;.9;0;0" keyTimes="0;${b};${r2(b + .05)};${r2(Math.min(b + .3, .99))};1" dur="2.5s" repeatCount="indefinite"/></rect>
-<text x="${x}" y="${y + 4.5}" text-anchor="middle" class="m" font-size="12" fill="#e6dcf5">${k}</text>`;
+<text x="${x}" y="${y + 4.5}" text-anchor="middle" class="m" font-size="12" fill="#d9ecf2">${k}</text>`;
   });
   const caps = [
     ['Multi-agent orchestration', 'harness files · loop engineering · human-in-the-loop', 'graph'],
@@ -310,21 +331,21 @@ ${cursor(r2(116 + (8 + PORTFOLIO.length) * 6.6), 109, 12)}`;
   const slides = [
     ['Shipping open-source PRs', `${sk} merged into github/spec-kit`, `
 <g stroke="${C.y}" stroke-width="4" stroke-linecap="round" fill="none"><path d="M${cx - 120} ${cy} H${cx + 120}"/><path d="M${cx - 60} ${cy} C${cx - 30} ${cy} ${cx - 30} ${cy - 50} ${cx} ${cy - 50} H${cx + 30} C${cx + 60} ${cy - 50} ${cx + 60} ${cy} ${cx + 90} ${cy}" stroke="${C.m}"/></g>
-${[-120, -60, 0, 90, 120].map(d => `<circle cx="${cx + d}" cy="${cy}" r="9" fill="#160a24" stroke="${C.y}" stroke-width="4"/>`).join('')}
-<circle cx="${cx}" cy="${cy - 50}" r="9" fill="#160a24" stroke="${C.m}" stroke-width="4"/><circle cx="${cx + 30}" cy="${cy - 50}" r="9" fill="#160a24" stroke="${C.m}" stroke-width="4"/>
+${[-120, -60, 0, 90, 120].map(d => `<circle cx="${cx + d}" cy="${cy}" r="9" fill="#0a1420" stroke="${C.y}" stroke-width="4"/>`).join('')}
+<circle cx="${cx}" cy="${cy - 50}" r="9" fill="#0a1420" stroke="${C.m}" stroke-width="4"/><circle cx="${cx + 30}" cy="${cy - 50}" r="9" fill="#0a1420" stroke="${C.m}" stroke-width="4"/>
 <text x="${cx}" y="${cy + 52}" text-anchor="middle" class="d" font-size="34" fill="#fff">${sk} merged</text>`],
     ['Hackathon nights', 'DYLP GenAI Hackathon 2026 · HungerMap PK', `
-<circle cx="${cx + 110}" cy="${cy - 50}" r="26" fill="#fde68a"/><circle cx="${cx + 122}" cy="${cy - 58}" r="24" fill="#3a1a12"/>
+<circle cx="${cx + 110}" cy="${cy - 50}" r="26" fill="#fde68a"/><circle cx="${cx + 122}" cy="${cy - 58}" r="24" fill="#0a1a24"/>
 ${[[-150, -60], [-90, -30], [-180, 10], [60, -70], [170, 0]].map(([dx, dy], k) => `<circle cx="${cx + dx}" cy="${cy + dy}" r="2.4" fill="#fff"><animate attributeName="opacity" values=".2;1;.2" dur="1.6s" begin="${-k * .3}s" repeatCount="indefinite"/></circle>`).join('')}
-<rect x="${cx - 70}" y="${cy - 40}" width="140" height="86" rx="8" fill="#1e1230" stroke="${C.o}" stroke-opacity=".6"/>
-<rect x="${cx - 60}" y="${cy - 30}" width="120" height="66" rx="4" fill="#120820"/>
+<rect x="${cx - 70}" y="${cy - 40}" width="140" height="86" rx="8" fill="#0f1c2b" stroke="${C.o}" stroke-opacity=".6"/>
+<rect x="${cx - 60}" y="${cy - 30}" width="120" height="66" rx="4" fill="#081019"/>
 ${[0, 1, 2, 3].map(k => `<rect x="${cx - 50}" y="${cy - 20 + k * 13}" width="${[70, 90, 50, 80][k]}" height="5" rx="2.5" fill="${[C.m, C.t, C.y, C.o][k]}" opacity=".85"/>`).join('')}
-<path d="M${cx - 90} ${cy + 50} H${cx + 90} l-12 10 H${cx - 78} z" fill="#2e1d3f"/>`],
+<path d="M${cx - 90} ${cy + 50} H${cx + 90} l-12 10 H${cx - 78} z" fill="#16283a"/>`],
     ['Always learning', 'Panaversity Agent Factory · Anthropic certified', `
 <path d="M${cx - 90} ${cy - 20} L${cx} ${cy - 60} L${cx + 90} ${cy - 20} L${cx} ${cy + 20} Z" fill="${C.t}" fill-opacity=".85"/>
 <path d="M${cx - 50} ${cy} v30 c0 14 100 14 100 0 v-30 L${cx} ${cy + 20} Z" fill="#0e7490"/>
 <path d="M${cx + 70} ${cy - 12} v40" stroke="${C.y}" stroke-width="3"/><circle cx="${cx + 70}" cy="${cy + 32}" r="6" fill="${C.y}"/>
-<text x="${cx}" y="${cy + 72}" text-anchor="middle" class="m" font-size="13" fill="#a5fbfd">MCP · Claude Code · Claude 101</text>`],
+<text x="${cx}" y="${cy + 72}" text-anchor="middle" class="m" font-size="13" fill="#ffd1ea">MCP · Claude Code · Claude 101</text>`],
     ['Teaching AI through play', 'AI Fluency Arcade · 13 prompting concepts', `
 <rect x="${cx - 100}" y="${cy - 36}" width="200" height="90" rx="45" fill="${C.y}" fill-opacity=".92"/>
 <path d="M${cx - 60} ${cy + 9} h28 M${cx - 46} ${cy - 5} v28" stroke="#3a2308" stroke-width="8" stroke-linecap="round"/>
@@ -339,7 +360,7 @@ ${[0, 1, 2, 3].map(k => `<rect x="${cx - 50}" y="${cy - 20 + k * 13}" width="${[
 <rect x="636" y="116" width="540" height="214" fill="url(#${p}s${i})"/>${art}
 <rect x="636" y="282" width="540" height="48" fill="#000" fill-opacity=".35"/>
 <text x="656" y="304" class="d" font-size="16" fill="#fff">${t}</text>
-<text x="656" y="321" class="m" font-size="11" fill="#e6dcf5">${esc(sub)}</text></g></g>`;
+<text x="656" y="321" class="m" font-size="11" fill="#d9ecf2">${esc(sub)}</text></g></g>`;
   });
   s += `</g><rect x="636" y="116" width="540" height="214" rx="16" stroke="#fff" stroke-opacity=".1"/>`;
   const rings = [['CODE', .92, C.y], ['LEARN', .85, C.o], ['SHIP', .7, C.m]];
@@ -409,7 +430,9 @@ ${label(692, 44, '// TOOLKIT', C.m)}${title(692, 80, 'Grouped by craft')}`;
 <ellipse cx="${cx}" cy="${cy}" rx="18" ry="6.5"/><ellipse cx="${cx}" cy="${cy}" rx="18" ry="6.5" transform="rotate(60 ${cx} ${cy})"/><ellipse cx="${cx}" cy="${cy}" rx="18" ry="6.5" transform="rotate(-60 ${cx} ${cy})"/></g>
 <circle cx="${cx}" cy="${cy}" r="3.5" fill="#fff"/>`;
   const STEPS = 72;
-  const tile = (n, r) => `<circle r="${r}" fill="#170c26" stroke="${BRAND[n]}" stroke-opacity=".6" stroke-width="1.4"/>${icon(n, 0, 0, r * 1.05)}`;
+  let tileN = 0;
+  const tile = (n, r) => `<circle r="${r}" stroke="${BRAND[n]}" stroke-width="1.2" opacity="0"><animate attributeName="r" values="${r};${r + 10}" dur="2.6s" begin="-${r2((tileN++ * .37) % 2.6)}s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0" dur="2.6s" begin="-${r2(((tileN - 1) * .37) % 2.6)}s" repeatCount="indefinite"/></circle>
+<circle r="${r}" fill="#0b1622" stroke="${BRAND[n]}" stroke-opacity=".6" stroke-width="1.4"/>${icon(n, 0, 0, r * 1.05)}`;
   orbits.forEach(o => {
     o.icons.forEach((n, k) => {
       const ph = k / o.icons.length * 2 * Math.PI;
@@ -434,7 +457,7 @@ ${label(692, 44, '// TOOLKIT', C.m)}${title(692, 80, 'Grouped by craft')}`;
     const anim = c < 1 ? `values="0;0;1;0;0" keyTimes="0;${a};${b};${c};1"` : `values="0;0;1;0" keyTimes="0;${a};${b};1"`;
     s += `<g>${enter(k * .05, 2.6)}<rect x="${x}" y="${cy2}" width="${w}" height="24" rx="12" fill="${col}" fill-opacity=".08" stroke="#fff" stroke-opacity=".12"/>
 <rect x="${x}" y="${cy2}" width="${w}" height="24" rx="12" fill="${col}" fill-opacity=".12" stroke="${col}" stroke-width="1.5" opacity="0"><animate attributeName="opacity" ${anim} dur="${dur}s" repeatCount="indefinite"/></rect>
-<text x="${x + w / 2}" y="${cy2 + 16}" text-anchor="middle" class="m" font-size="11.5" fill="#e6dcf5">${esc(t)}</text></g>`;
+<text x="${x + w / 2}" y="${cy2 + 16}" text-anchor="middle" class="m" font-size="11.5" fill="#d9ecf2">${esc(t)}</text></g>`;
   });
   return s + '</svg>';
 }
@@ -444,14 +467,14 @@ function idDash(S) {
   const p = 'i', W = 1200, H = 520;
   const sk = S.prs.filter(x => x.repo === 'github/spec-kit').length;
   let s = head(p, W, H) + hoodieDef(p) + `
-<linearGradient id="${p}strap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a3124f"/><stop offset=".5" stop-color="${C.m}"/><stop offset="1" stop-color="#a3124f"/></linearGradient>
+<linearGradient id="${p}strap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2b45c9"/><stop offset=".5" stop-color="${C.m}"/><stop offset="1" stop-color="#2b45c9"/></linearGradient>
 <linearGradient id="${p}metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
 <linearGradient id="${p}gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset=".5" stop-color="#d97706"/><stop offset="1" stop-color="#fcd34d"/></linearGradient>
 <linearGradient id="${p}foil" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".4" stop-color="${C.t}" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity=".35"/><stop offset=".6" stop-color="${C.m}" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <linearGradient id="${p}bar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${C.m}" stop-opacity=".5"/><stop offset="1" stop-color="${C.o}"/></linearGradient>
 <clipPath id="${p}cardc"><rect x="50" y="168" width="240" height="330" rx="18"/></clipPath>
 <clipPath id="${p}portc"><rect x="90" y="214" width="160" height="134" rx="14"/></clipPath>
-<linearGradient id="${p}portBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.o}"/><stop offset=".6" stop-color="${C.m}"/><stop offset="1" stop-color="#3d0f3f"/></linearGradient>
+<linearGradient id="${p}portBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.o}"/><stop offset=".6" stop-color="${C.m}"/><stop offset="1" stop-color="#0a2a3a"/></linearGradient>
 </defs>`;
   let bars = '', bx = 74; const rr = rng(7);
   while (bx < 262) { const w = 1 + Math.floor(rr() * 4); bars += `<rect x="${bx}" y="462" width="${w}" height="20" fill="${C.tx}" fill-opacity=".8"/>`; bx += w + 1 + Math.floor(rr() * 3); }
@@ -538,7 +561,7 @@ function feed(S) {
   s += `</defs>${card(p, 0, 0, 728, H)}${card(p, 752, 0, 448, H)}
 ${label(24, 44, '// LIVE FROM OPEN SOURCE')}
 ${pulseDot(250, 40, '#34d399', 3.5)}<text x="262" y="44" class="m" font-size="11" fill="${C.mu}">auto-synced from GitHub · ${esc(S.generated)}</text>
-<rect x="24" y="70" width="680" height="340" rx="14" fill="#0f0820" stroke="#fff" stroke-opacity=".1"/>
+<rect x="24" y="70" width="680" height="340" rx="14" fill="#060d16" stroke="#fff" stroke-opacity=".1"/>
 <path d="M24 102 H704" stroke="#fff" stroke-opacity=".08"/>
 <circle cx="44" cy="86" r="5" fill="#f87171"/><circle cx="60" cy="86" r="5" fill="#fbbf24"/><circle cx="76" cy="86" r="5" fill="#34d399"/>
 <text x="364" y="90" text-anchor="middle" class="m" font-size="11" fill="${C.dim}">noor@agent-factory: ~/open-source</text>
@@ -553,6 +576,8 @@ ${pulseDot(250, 40, '#34d399', 3.5)}<text x="262" y="44" class="m" font-size="11
     s += `<g clip-path="url(#${p}l${k})"><text x="44" y="${y}" class="m" font-size="12.5" fill="${C.tx}"><tspan fill="#34d399">✔</tspan> <tspan fill="${C.dim}">${x.date.slice(5)}</tspan> <tspan fill="${C.y}">#${x.number}</tspan> <tspan fill="${C.t}">${esc(repo)}</tspan> <tspan fill="${C.o}">${esc(kind)}</tspan> ${esc(msg)}</text></g>`;
   });
   const fy = 156 + latest.length * 28 + 6;
+  // highlight bar that scans down the log once it has finished typing
+  s += `<rect x="30" y="156" width="668" height="26" rx="6" fill="${C.y}" fill-opacity=".07" stroke="${C.y}" stroke-opacity=".25" opacity="0"><animateTransform attributeName="transform" type="translate" values="${latest.map((_, k) => `0 ${k * 28}`).join(';')}" calcMode="discrete" dur="${r2(latest.length * .5)}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.55;.57;.92;.94" dur="${LOOP}s" repeatCount="indefinite"/></rect>`;
   s += `<path d="M44 ${fy - 12} H684" stroke="#fff" stroke-opacity=".06"/>
 <text x="44" y="${fy + 8}" class="m" font-size="12" fill="${C.mu}"><tspan fill="${C.m}">${S.prs.length}</tspan> merged · <tspan fill="${C.m}">${S.open}</tspan> in review · first merge <tspan fill="${C.tx}">${esc(mdate(S.prs[S.prs.length - 1].date))}</tspan></text>`;
   // merge-day heatmap: 18 weeks ending this week
@@ -608,6 +633,7 @@ function timeline(S) {
   let s = head(p, W, H) + `</defs>${card(p, 0, 0, W, H)}
 ${label(32, 44, '// JOURNEY')}${title(32, 80, 'From learner to open-source contributor')}
 <path d="${d}" stroke="#fff" stroke-opacity=".08" stroke-width="6" stroke-linecap="round"/>
+<path d="${d}" stroke="${C.o}" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="2 10" transform="translate(0 12)"><animate attributeName="stroke-dashoffset" values="0;-24" dur="1s" repeatCount="indefinite"/></path>
 <path d="${d}" pathLength="1" stroke="url(#${p}aur)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="0"><animate attributeName="stroke-dashoffset" values="1;0" dur="2.6s" fill="freeze"/></path>
 <circle r="5" fill="#fff" filter="url(#${p}neon)" opacity="0"><animateMotion path="${d}" dur="5s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.02;.06;.94;1" dur="5s" repeatCount="indefinite"/></circle>`;
   miles.forEach(([date, t, sub], i) => {
@@ -670,18 +696,19 @@ function projects() {
       return;
     }
     const [name, tag, stackTxt, desc, g, col] = it;
-    s += `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16"/></clipPath><g>${enter(.2 + i * .12, 3)}
+    s += `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16"/></clipPath><g>${enter(.2 + i * .12, 3)}<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="${r2(4 + i * .45)}s" repeatCount="indefinite"/>
 <rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16" fill="#fff" fill-opacity=".03" stroke="#fff" stroke-opacity=".1"/>
+<rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16" stroke="${col}" stroke-opacity="0"><animate attributeName="stroke-opacity" values="0;0;.7;0;0" keyTimes="0;${r2(i / 8)};${r2(i / 8 + .06)};${r2(i / 8 + .14)};1" dur="8s" repeatCount="indefinite"/></rect>
 <rect x="${x}" y="${y}" width="${cw}" height="3" fill="${col}" opacity=".9" clip-path="url(#${id})"/>
 <rect x="${x + 18}" y="${y + 22}" width="44" height="44" rx="12" fill="${col}" fill-opacity=".14" stroke="${col}" stroke-opacity=".5"/>
 <g transform="translate(${x + 40},${y + 44})" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="${2 + i * .3}s" repeatCount="indefinite"/>${G[g]}</g></g>
 ${pulseDot(x + cw - 72, y + 36, '#34d399', 3)}<text x="${x + cw - 62}" y="${y + 40}" class="m" font-size="9" letter-spacing="1" fill="${C.mu}">SHIPPED</text>
 <text x="${x + 18}" y="${y + 92}" class="m" font-size="9.5" letter-spacing="1.4" fill="${col}">${tag}</text>
 <text x="${x + 18}" y="${y + 114}" class="d" font-size="19" fill="${C.tx}">${esc(name)}</text>
-${wrap(desc, 36).slice(0, 4).map((l, k) => `<text x="${x + 18}" y="${y + 138 + k * 16}" class="m" font-size="10.8" fill="#cbbfe0">${esc(l)}</text>`).join('')}
+${wrap(desc, 36).slice(0, 4).map((l, k) => `<text x="${x + 18}" y="${y + 138 + k * 16}" class="m" font-size="10.8" fill="#bcd2dc">${esc(l)}</text>`).join('')}
 <path d="M${x + 18} ${y + ch - 34} H${x + cw - 18}" stroke="#fff" stroke-opacity=".07"/>
 <text x="${x + 18}" y="${y + ch - 15}" class="m" font-size="10" fill="${C.dim}">${esc(stackTxt)}</text>
-<g clip-path="url(#${id})"><rect x="${x - 120}" y="${y}" width="80" height="${ch}" fill="url(#${p}shine)"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${cw + 200} 0" keyTimes="0;${r2(i / 9)};${r2(i / 9 + .25)}" dur="7s" repeatCount="indefinite"/></rect></g></g>`;
+<g clip-path="url(#${id})"><rect x="${x - 120}" y="${y}" width="80" height="${ch}" fill="url(#${p}shine)"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${cw + 200} 0" keyTimes="0;${r2(i / 9)};${r2(i / 9 + .25)}" dur="7s" repeatCount="indefinite"/></rect></g></g></g>`;
   });
   return s + '</svg>';
 }
@@ -700,7 +727,7 @@ ${torso(p, 160)}
 <g>${avatarHead({ wink: true })}</g>
 </g></g>
 <g filter="url(#${p}neon)"><animate attributeName="opacity" values="1;1;.35;1;.6;1;1" keyTimes="0;.7;.72;.74;.76;.78;1" dur="5s" repeatCount="indefinite"/>
-<rect x="40" y="34" width="290" height="62" rx="16" stroke="${C.m}" stroke-width="2.2"/>
+<rect x="40" y="34" width="290" height="62" rx="16" stroke="${C.m}" stroke-width="2.2"><animate attributeName="stroke" values="${C.y};${C.o};${C.m};${C.o};${C.y}" dur="6s" repeatCount="indefinite"/></rect>
 <text x="185" y="75" text-anchor="middle" class="d" font-size="28" fill="#fff" stroke="${C.m}" stroke-width=".8">${USER}</text></g>`;
   const spark = (x, y, r, k) => `<path d="M${x} ${y - r} Q${x} ${y} ${x + r} ${y} Q${x} ${y} ${x} ${y + r} Q${x} ${y} ${x - r} ${y} Q${x} ${y} ${x} ${y - r} Z" fill="${C.y}"><animate attributeName="opacity" values=".1;1;.1" dur="1.8s" begin="${-k * .45}s" repeatCount="indefinite"/></path>`;
   s += spark(350, 40, 9, 0) + spark(30, 130, 7, 1) + spark(360, 150, 6, 2) + spark(70, 200, 5, 3);
@@ -712,7 +739,7 @@ ${torso(p, 160)}
     const x = 450 + (i % 2) * 362, y = 118 + Math.floor(i / 2) * 96, w = 346, hh = 80;
     s += `<g>${enter(.3 + i * .2)}<rect x="${x}" y="${y}" width="${w}" height="${hh}" rx="16" fill="#fff" fill-opacity=".035" stroke="#fff" stroke-opacity=".1"/>
 <rect x="${x}" y="${y}" width="${w}" height="${hh}" rx="16" stroke="${C.o}" stroke-opacity="0"><animate attributeName="stroke-opacity" values="0;0;.8;0;0" keyTimes="0;${r2(i * .2)};${r2(i * .2 + .08)};${r2(i * .2 + .2)};1" dur="4s" repeatCount="indefinite"/></rect>
-<rect x="${x + 16}" y="${y + 18}" width="44" height="44" rx="12" fill="#170c26" stroke="${BRAND[ic]}" stroke-opacity=".5"/>${icon(ic, x + 38, y + 40, 22)}
+<rect x="${x + 16}" y="${y + 18}" width="44" height="44" rx="12" fill="#0b1622" stroke="${BRAND[ic]}" stroke-opacity=".5"/>${icon(ic, x + 38, y + 40, 22)}
 <text x="${x + 76}" y="${y + 36}" class="d" font-size="17" fill="${C.tx}">${t}</text>
 <text x="${x + 76}" y="${y + 56}" class="m" font-size="11.5" fill="${C.mu}">${esc(h)}</text>
 <g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;6 0;0 0;0 0" keyTimes="0;${r2(i * .15)};${r2(i * .15 + .1)};${r2(i * .15 + .2)};1" dur="3s" repeatCount="indefinite"/>
@@ -724,9 +751,11 @@ ${torso(p, 160)}
 /* ------------------------------------------------------------------ divider */
 function divider() {
   const p = 'v', W = 1200, H = 40;
-  const d = `M0 20 ${Array.from({ length: 12 }, (_, k) => `Q${k * 100 + 50} ${k % 2 ? 32 : 8} ${k * 100 + 100} 20`).join(' ')}`;
+  // heartbeat line: flat runs with an EKG spike every 300px
+  const d = 'M0 20 ' + Array.from({ length: 4 }, (_, k) => { const x = k * 300; return `H${x + 120} L${x + 132} 12 L${x + 142} 34 L${x + 152} 4 L${x + 164} 30 L${x + 172} 20`; }).join(' ') + ' H1200';
   return head(p, W, H, { noFont: true }) + `</defs>
-<path d="${d}" stroke="url(#${p}aur)" stroke-opacity=".5" stroke-width="2" stroke-dasharray="6 8"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.2s" repeatCount="indefinite"/></path>
+<path d="${d}" stroke="#fff" stroke-opacity=".07" stroke-width="2"/>
+<path d="${d}" pathLength="1" stroke="url(#${p}aur)" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray=".25 .75" filter="url(#${p}neon)"><animate attributeName="stroke-dashoffset" values=".25;-.75" dur="3s" repeatCount="indefinite"/></path>
 <circle r="4" fill="#fff" filter="url(#${p}neon)"><animateMotion path="${d}" dur="6s" repeatCount="indefinite"/></circle>
 <circle r="3" fill="${C.y}" filter="url(#${p}neon)"><animateMotion path="${d}" dur="6s" begin="-3s" repeatCount="indefinite"/></circle>
 </svg>`;
