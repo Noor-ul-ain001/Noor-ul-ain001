@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="./hero.svg?v=7d512a41" width="100%" alt="Noor ul Ain — Agentic AI Engineer, spec-kit contributor, MCP workflow builder"/>
+<img src="./hero.svg?v=2c0eff7d" width="100%" alt="Noor ul Ain — Agentic AI Engineer, spec-kit contributor, MCP workflow builder"/>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-noor--mudasir--299a64256-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noor-mudasir-299a64256/)
 [![GitHub](https://img.shields.io/badge/GitHub-Noor--ul--ain001-5b7cff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Noor-ul-ain001)
 [![Portfolio](https://img.shields.io/badge/Portfolio-noor--ul--ain--dev-2ee6ff?style=for-the-badge&logo=vercel&logoColor=black)](https://noor-ul-ain-dev.vercel.app)
 [![Email](https://img.shields.io/badge/Email-aina25239@gmail.com-c6ff3d?style=for-the-badge&logo=gmail&logoColor=black)](mailto:aina25239@gmail.com)
 
-<img src="./about-life.svg?v=7d512a41" width="100%" alt="What I build — multi-agent orchestration, RAG pipelines, MCP workflows — and life beyond the terminal"/>
+<img src="./about-life.svg?v=2c0eff7d" width="100%" alt="What I build — multi-agent orchestration, RAG pipelines, MCP workflows — and life beyond the terminal"/>
 
-<img src="./divider.svg?v=7d512a41" width="100%"/>
+<img src="./divider.svg?v=2c0eff7d" width="100%"/>
 
 </div>
 
@@ -30,15 +30,15 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./timeline.svg?v=7d512a41" width="100%" alt="Journey timeline and credentials — Panaversity, OpenClaw, spec-kit, DYLP GenAI Hackathon, Anthropic and Forage certifications"/>
+<img src="./timeline.svg?v=2c0eff7d" width="100%" alt="Journey timeline and credentials — Panaversity, OpenClaw, spec-kit, DYLP GenAI Hackathon, Anthropic and Forage certifications"/>
 
-<img src="./divider.svg?v=7d512a41" width="100%"/>
+<img src="./divider.svg?v=2c0eff7d" width="100%"/>
 
-<img src="./stack.svg?v=7d512a41" width="100%" alt="Tech orbit and toolkit — AI/agents, frontend, backend & data, vision & DevOps"/>
+<img src="./stack.svg?v=2c0eff7d" width="100%" alt="Tech orbit and toolkit — AI/agents, frontend, backend & data, vision & DevOps"/>
 
-<img src="./id-dashboard.svg?v=7d512a41" width="100%" alt="ID badge and live dashboard — spec-kit merges, merged PRs, PRs in review, public repos, merges per month"/>
+<img src="./id-dashboard.svg?v=2c0eff7d" width="100%" alt="ID badge and live dashboard — spec-kit merges, merged PRs, PRs in review, public repos, merges per month"/>
 
-<img src="./divider.svg?v=7d512a41" width="100%"/>
+<img src="./divider.svg?v=2c0eff7d" width="100%"/>
 
 </div>
 
@@ -46,7 +46,7 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./feed.svg?v=7d512a41" width="100%" alt="Live feed of my latest merged pull requests and merge-day heatmap"/>
+<img src="./feed.svg?v=2c0eff7d" width="100%" alt="Live feed of my latest merged pull requests and merge-day heatmap"/>
 
 </div>
 
@@ -75,14 +75,47 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./divider.svg?v=7d512a41" width="100%"/>
-
-<img src="./projects.svg?v=7d512a41" width="100%" alt="Featured projects — AI Employee, Codebase Auditor, HungerMap PK, RAG Chatbot, AI Fluency Arcade, Portfolio, BG Removal Tool"/>
+<img src="./divider.svg?v=2c0eff7d" width="100%"/>
 
 </div>
 
+## 🚀 Featured Projects
+
+<div align="center">
+
+<img src="./projects.svg?v=2c0eff7d" width="100%" alt="Featured deployed projects — Shieldly, KSoR, TaskFlow, IRIS AXIS, Pixel's AI Academy, MCP Transports, JS Visualizer, The Buzz Crew"/>
+
+<img src="./deploys.svg?v=2c0eff7d" width="100%" alt="Client and creative builds live on the web"/>
+
+</div>
+
+#### 🔗 Visit them live <sub>· uptime checked automatically every 6 hours</sub>
+
+<!-- PROJECTS:START -->
+| | Project | What it is | Live link |
+|---|---|---|---|
+| 🟢 live | **Shieldly** | Turns online abuse into a case you can file — manipulation checks, tamper-evident evidence and NCCIA complaint drafts, in English & Roman Urdu. | [shieldly-tau.vercel.app](https://shieldly-tau.vercel.app) |
+| 🟢 live | **KSoR** | An SDK for governed, authoritative knowledge systems for humans and AI agents — it solves the authority problem, not just search. | [ksor-blush.vercel.app](https://ksor-blush.vercel.app) |
+| 🟢 live | **TaskFlow** | The project-management platform designed for the Agent Era — AI-powered task intelligence, built across a multi-phase hackathon. | [hackathon-todo-phase-3.vercel.app](https://hackathon-todo-phase-3.vercel.app) |
+| 🟢 live | **IRIS AXIS** | Professional remote CCTV monitoring for U.S. homes and businesses — trained human attention and timely incident reporting. | [iris-axis.vercel.app](https://iris-axis.vercel.app) |
+| 🟢 live | **Pixel's AI Academy** | Learn AI by helping Pixel at his help booth — retrieval modes, supervised vs unsupervised and reinforcement learning, one level each. | [summer-camp-game.vercel.app](https://summer-camp-game.vercel.app) |
+| 🟢 live | **MCP Transports** | A complete visual breakdown of how MCP clients and servers talk — the transports that carry JSON-RPC between them. | [mcp-2.vercel.app](https://mcp-2.vercel.app) |
+| 🟢 live | **JS Visualizer** | Step through JavaScript line by line and watch the call stack and memory change as your code runs. | [js-visualizer-theta.vercel.app](https://js-visualizer-theta.vercel.app) |
+| 🟢 live | **The Buzz Crew** | Full-service digital agency from Karachi — social, SEO, web & software, UI/UX and Meta ads for brands in PK, UAE and UK. | [thebuzzcrew.vercel.app](https://thebuzzcrew.vercel.app) |
+| 🟢 live | **Portfolio** | Next.js · motion | [noor-ul-ain-dev.vercel.app](https://noor-ul-ain-dev.vercel.app) |
+| 🟢 live | **Aesthetoderm** | Client · clinic | [aesthetoderm-website.vercel.app](https://aesthetoderm-website.vercel.app) |
+| 🟢 live | **Refine Aesthetics** | Client · clinic | [refine-aesthetics-website.vercel.app](https://refine-aesthetics-website.vercel.app) |
+| 🟢 live | **Aurelia Parfum** | React · gsap | [aurelia-parfum.vercel.app](https://aurelia-parfum.vercel.app) |
+| 🟢 live | **Palmo Coconut** | Three.js · gsap | [palmo-coconut.vercel.app](https://palmo-coconut.vercel.app) |
+| 🟢 live | **DriveHouse Motors** | React | [velox-motors-app-pied.vercel.app](https://velox-motors-app-pied.vercel.app) |
+| 🟢 live | **Smash Burger** | Gsap scroll | [smash-burger-landing.vercel.app](https://smash-burger-landing.vercel.app) |
+| 🟢 live | **Scroll Chapters** | Next.js · lenis | [scroll-video-chapters.vercel.app](https://scroll-video-chapters.vercel.app) |
+| 🟢 live | **Nooritoo Shop** | E-commerce | [noorito-ecom.vercel.app](https://noorito-ecom.vercel.app) |
+| 🟢 live | **iPhone Website** | Product landing | [iphone-website-sepia.vercel.app](https://iphone-website-sepia.vercel.app) |
+<!-- PROJECTS:END -->
+
 <details>
-<summary><b>📋 Projects as a table</b></summary>
+<summary><b>🧠 More agentic builds (source &amp; hackathons)</b></summary>
 
 | 🔖 | Project | Stack | Description |
 |---|---|---|---|
@@ -100,13 +133,27 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D contribution city, rebuilt daily"/>
+<img src="./city.svg?v=2c0eff7d" width="100%" alt="Animated contribution skyline — one tower per month, with streaks and totals"/>
 
-<img src="https://github.com/Noor-ul-ain001/Noor-ul-ain001/blob/output/github-contribution-grid-snake-dark.svg?raw=true" width="100%" alt="Contribution snake"/>
+<sub><b><!--C:contrib-->479<!--/C--></b> contributions · <b><!--C:commits-->227<!--/C--></b> commits in the last year — rebuilt from live GitHub data</sub>
 
-<img src="./divider.svg?v=7d512a41" width="100%"/>
+<br/><br/>
 
-<img src="./connect.svg?v=7d512a41" width="100%" alt="Connect with Noor ul Ain"/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg"/>
+  <source media="(prefers-color-scheme: light)" srcset="./profile-3d-contrib/profile-season-animate.svg"/>
+  <img src="./profile-3d-contrib/profile-night-rainbow.svg" width="100%" alt="3D contribution city — night view in dark mode, seasons in light mode"/>
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Noor-ul-ain001/Noor-ul-ain001/output/github-contribution-grid-snake-dark.svg"/>
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Noor-ul-ain001/Noor-ul-ain001/output/github-contribution-grid-snake.svg"/>
+  <img src="https://raw.githubusercontent.com/Noor-ul-ain001/Noor-ul-ain001/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Contribution snake eating my commit grid"/>
+</picture>
+
+<img src="./divider.svg?v=2c0eff7d" width="100%"/>
+
+<img src="./connect.svg?v=2c0eff7d" width="100%" alt="Connect with Noor ul Ain"/>
 
 *🤝 Open to remote internships and roles in AI/ML Engineering, Agentic AI, and Full‑Stack Development. Let's build something amazing together!*
 

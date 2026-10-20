@@ -22,26 +22,79 @@ async function search(q) {
   } while (items.length < total && page <= 10);
   return { total, items };
 }
-async function loadStats() {
-  const cache = path.join(__dirname, 'stats.json');
+async function gql(query) {
+  if (!process.env.GITHUB_TOKEN) throw new Error('graphql needs GITHUB_TOKEN');
+  const r = await fetch('https://api.github.com/graphql', { method: 'POST', headers: { 'User-Agent': 'profile-build', Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }, body: JSON.stringify({ query }) });
+  const j = await r.json();
+  if (!r.ok || j.errors) throw new Error('graphql: ' + JSON.stringify(j.errors || r.status));
+  return j.data;
+}
+async function isLive(url) {
   try {
+    const r = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(15000), headers: { 'User-Agent': 'profile-build' } });
+    return r.status < 400;
+  } catch { return false; }
+}
+// each source falls back to the last good value in stats.json, so one outage never blanks the profile
+async function loadStats() {
+  const cacheFile = path.join(__dirname, 'stats.json');
+  const cache = fs.existsSync(cacheFile) ? JSON.parse(fs.readFileSync(cacheFile, 'utf8')) : {};
+  const st = { ...cache, generated: new Date().toISOString().slice(0, 10) };
+  const attempt = async (name, fn) => { try { await fn(); } catch (e) { console.warn(`${name} failed, using cache:`, e.message); } };
+  await attempt('prs', async () => {
     const [merged, open, user] = await Promise.all([
       search(`author:${USER} type:pr is:merged -user:${USER}`),
       search(`author:${USER} type:pr is:open -user:${USER}`),
       gh(`users/${USER}`),
     ]);
-    const prs = merged.items.map(i => ({
+    st.prs = merged.items.map(i => ({
       repo: i.repository_url.split('/repos/')[1], number: i.number, title: i.title,
       date: (i.pull_request.merged_at || i.closed_at).slice(0, 10), url: i.html_url,
     })).sort((a, b) => b.date.localeCompare(a.date) || b.number - a.number);
-    const st = { generated: new Date().toISOString().slice(0, 10), prs, open: open.total, repos: user.public_repos, followers: user.followers };
-    fs.writeFileSync(cache, JSON.stringify(st, null, 1));
-    return st;
-  } catch (e) {
-    console.warn('live fetch failed, using cache:', e.message);
-    return JSON.parse(fs.readFileSync(cache, 'utf8'));
-  }
+    Object.assign(st, { open: open.total, repos: user.public_repos, followers: user.followers });
+  });
+  await attempt('contributions', async () => {
+    const d = await gql(`query { user(login:"${USER}") { contributionsCollection { totalCommitContributions totalPullRequestContributions totalPullRequestReviewContributions totalIssueContributions contributionCalendar { totalContributions weeks { contributionDays { date contributionCount } } } } } }`);
+    const c = d.user.contributionsCollection;
+    st.contrib = {
+      total: c.contributionCalendar.totalContributions, commits: c.totalCommitContributions, prs: c.totalPullRequestContributions,
+      reviews: c.totalPullRequestReviewContributions, issues: c.totalIssueContributions,
+      days: c.contributionCalendar.weeks.flatMap(w => w.contributionDays).map(x => [x.date, x.contributionCount]),
+    };
+  });
+  await attempt('uptime', async () => {
+    const urls = [...PROJECTS, ...BUILDS].map(x => x.url);
+    const res = await Promise.all(urls.map(isLive));
+    st.live = Object.fromEntries(urls.map((u, i) => [u, res[i]]));
+  });
+  fs.writeFileSync(cacheFile, JSON.stringify(st, null, 1));
+  return st;
 }
+
+/* ------------------------------------------------------------------ deployed work */
+const PROJECTS = [
+  { name: 'Shieldly', tag: 'AI SAFETY AGENT', stack: 'Next.js · TypeScript · AI', url: 'https://shieldly-tau.vercel.app', g: 'shield', desc: 'Turns online abuse into a case you can file — manipulation checks, tamper-evident evidence and NCCIA complaint drafts, in English & Roman Urdu.' },
+  { name: 'KSoR', tag: 'OPEN-SOURCE SDK', stack: 'Knowledge System of Record', url: 'https://ksor-blush.vercel.app', g: 'book', desc: 'An SDK for governed, authoritative knowledge systems for humans and AI agents — it solves the authority problem, not just search.' },
+  { name: 'TaskFlow', tag: 'AGENTIC PM', stack: 'FastAPI · Next.js · AI', url: 'https://hackathon-todo-phase-3.vercel.app', g: 'bot', desc: 'The project-management platform designed for the Agent Era — AI-powered task intelligence, built across a multi-phase hackathon.' },
+  { name: 'IRIS AXIS', tag: 'CLIENT · SECURITY', stack: 'Vite · React', url: 'https://iris-axis.vercel.app', g: 'eye', desc: 'Professional remote CCTV monitoring for U.S. homes and businesses — trained human attention and timely incident reporting.' },
+  { name: "Pixel's AI Academy", tag: 'EDU GAME', stack: 'HTML · CSS · JavaScript', url: 'https://summer-camp-game.vercel.app', g: 'game', desc: 'Learn AI by helping Pixel at his help booth — retrieval modes, supervised vs unsupervised and reinforcement learning, one level each.' },
+  { name: 'MCP Transports', tag: 'VISUAL EXPLAINER', stack: 'HTML · CSS · JavaScript', url: 'https://mcp-2.vercel.app', g: 'plug', desc: 'A complete visual breakdown of how MCP clients and servers talk — the transports that carry JSON-RPC between them.' },
+  { name: 'JS Visualizer', tag: 'DEV TOOL', stack: 'JavaScript', url: 'https://js-visualizer-theta.vercel.app', g: 'code', desc: 'Step through JavaScript line by line and watch the call stack and memory change as your code runs.' },
+  { name: 'The Buzz Crew', tag: 'AGENCY SITE', stack: 'Next.js · TypeScript', url: 'https://thebuzzcrew.vercel.app', g: 'globe', desc: 'Full-service digital agency from Karachi — social, SEO, web & software, UI/UX and Meta ads for brands in PK, UAE and UK.' },
+];
+const BUILDS = [
+  { name: 'Portfolio', tag: 'NEXT.JS · MOTION', url: 'https://noor-ul-ain-dev.vercel.app', c: '#c6ff3d' },
+  { name: 'Aesthetoderm', tag: 'CLIENT · CLINIC', url: 'https://aesthetoderm-website.vercel.app', c: '#2ee6ff' },
+  { name: 'Refine Aesthetics', tag: 'CLIENT · CLINIC', url: 'https://refine-aesthetics-website.vercel.app', c: '#5b7cff' },
+  { name: 'Aurelia Parfum', tag: 'REACT · GSAP', url: 'https://aurelia-parfum.vercel.app', c: '#ff5ea8' },
+  { name: 'Palmo Coconut', tag: 'THREE.JS · GSAP', url: 'https://palmo-coconut.vercel.app', c: '#c6ff3d' },
+  { name: 'DriveHouse Motors', tag: 'REACT', url: 'https://velox-motors-app-pied.vercel.app', c: '#2ee6ff' },
+  { name: 'Smash Burger', tag: 'GSAP SCROLL', url: 'https://smash-burger-landing.vercel.app', c: '#5b7cff' },
+  { name: 'Scroll Chapters', tag: 'NEXT.JS · LENIS', url: 'https://scroll-video-chapters.vercel.app', c: '#ff5ea8' },
+  { name: 'Nooritoo Shop', tag: 'E-COMMERCE', url: 'https://noorito-ecom.vercel.app', c: '#c6ff3d' },
+  { name: 'iPhone Website', tag: 'PRODUCT LANDING', url: 'https://iphone-website-sepia.vercel.app', c: '#2ee6ff' },
+];
+const host = u => u.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
 /* ------------------------------------------------------------------ theme */
 const b64 = f => fs.readFileSync(path.join(A, f)).toString('base64');
@@ -663,53 +716,132 @@ ${lines.map((l, k) => `<text x="${x + 14}" y="${y + 94 + k * 17}" class="d" font
   return s + '</svg>';
 }
 
-/* ------------------------------------------------------------------ projects */
-function projects() {
-  const p = 'p', W = 1200, H = 610;
-  const list = [
-    ['AI Employee', 'DIGITAL FTE', 'Python · OpenAI SDK · MCP', 'An autonomous AI employee that executes complex tasks with harness files, loop engineering and human-in-the-loop feedback.', 'bot', C.y],
-    ['Codebase Auditor', 'MULTI-AGENT', 'FastAPI · Pydantic AI · Claude', 'A 4-agent pipeline — Mapper, Security Auditor, Skill Generator, Prioritizer — that audits and improves codebases.', 'scan', C.o],
-    ['HungerMap PK', 'HACKATHON 2026', 'Next.js · Neon · Drizzle', 'Matches NGOs with resources to fight food insecurity. Sole database architect at DYLP GenAI Hackathon.', 'map', C.m],
-    ['RAG Chatbot', 'RETRIEVAL', 'Python · FastAPI · Vector DB', 'A retrieval-augmented chatbot using semantic search for accurate, context-aware answers.', 'chat', C.t],
-    ['AI Fluency Arcade', 'EDU GAME', 'HTML · CSS · Vanilla JS', 'An interactive arcade teaching 13 core AI prompting concepts — a Panaversity challenge entry.', 'game', C.y],
-    ['Portfolio', 'LIVE ON VERCEL', 'Next.js · TS · Framer Motion', `A dark, cinematic noir portfolio at ${PORTFOLIO}.`, 'globe', C.o],
-    ['BG Removal Tool', 'COMPUTER VISION', 'Python · OpenCV · MediaPipe', 'Real-time background removal powered by pose estimation.', 'eye', C.m],
-  ];
-  const G = {
-    bot: `<rect x="-11" y="-7" width="22" height="16" rx="5"/><path d="M0 -7 v-5"/><circle cx="0" cy="-13" r="2"/><circle cx="-4.5" cy="1" r="1.6"/><circle cx="4.5" cy="1" r="1.6"/>`,
-    scan: `<circle cx="-2" cy="-2" r="8"/><path d="M4 4 l7 7 M-6 -2 h8"/>`,
-    map: `<path d="M-11 -8 l7 -3 l8 3 l7 -3 v18 l-7 3 l-8 -3 l-7 3 z M-4 -11 v18 M4 -8 v18"/>`,
-    chat: `<path d="M-11 -9 h22 v14 h-12 l-6 5 v-5 h-4 z"/><path d="M-6 -2 h12"/>`,
-    game: `<rect x="-12" y="-7" width="24" height="15" rx="7"/><path d="M-7 0 h6 M-4 -3 v6"/><circle cx="5" cy="-1" r="1.5"/><circle cx="8" cy="2" r="1.5"/>`,
-    globe: `<circle r="11"/><path d="M-11 0 h22 M0 -11 c-6 6 -6 16 0 22 c6 -6 6 -16 0 -22"/>`,
-    eye: `<path d="M-12 0 c6 -9 18 -9 24 0 c-6 9 -18 9 -24 0 z"/><circle r="4"/>`,
-  };
-  let s = head(p, W, H) + `</defs>${card(p, 0, 0, W, H)}${label(32, 44, '// FEATURED PROJECTS')}${title(32, 80, 'Things I have shipped')}`;
-  const cw = 270, ch = 236, gx = 16;
-  list.concat([null]).forEach((it, i) => {
-    const x = 32 + (i % 4) * (cw + gx), y = 104 + Math.floor(i / 4) * (ch + gx), id = `${p}pc${i}`;
-    if (!it) {
-      s += `<g>${enter(.2 + i * .12, 3)}<rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16" stroke="${C.m}" stroke-opacity=".6" stroke-dasharray="6 6"><animate attributeName="stroke-dashoffset" values="0;-24" dur="1.5s" repeatCount="indefinite"/></rect>
-<text x="${x + cw / 2}" y="${y + 100}" text-anchor="middle" class="d" font-size="40" fill="${C.m}">+<animate attributeName="opacity" values=".4;1;.4" dur="2s" repeatCount="indefinite"/></text>
-<text x="${x + cw / 2}" y="${y + 138}" text-anchor="middle" class="d" font-size="16" fill="${C.tx}">Your project, next?</text>
-<text x="${x + cw / 2}" y="${y + 160}" text-anchor="middle" class="m" font-size="11" fill="${C.mu}">let's build something agentic</text></g>`;
-      return;
-    }
-    const [name, tag, stackTxt, desc, g, col] = it;
+/* ------------------------------------------------------------------ featured projects (deployed) */
+const GLYPH = {
+  bot: `<rect x="-11" y="-7" width="22" height="16" rx="5"/><path d="M0 -7 v-5"/><circle cx="0" cy="-13" r="2"/><circle cx="-4.5" cy="1" r="1.6"/><circle cx="4.5" cy="1" r="1.6"/>`,
+  shield: `<path d="M0 -12 l10 4 v6 c0 7 -5 11 -10 13 c-5 -2 -10 -6 -10 -13 v-6 z"/><path d="M-4 0 l3 3 l6 -6"/>`,
+  book: `<path d="M-11 -9 h8 a3 3 0 0 1 3 3 v15 a3 3 0 0 0 -3 -3 h-8 z M11 -9 h-8 a3 3 0 0 0 -3 3 v15 a3 3 0 0 1 3 -3 h8 z"/>`,
+  plug: `<path d="M-4 -11 v6 M4 -11 v6 M-8 -5 h16 v4 a8 8 0 0 1 -16 0 z M0 7 v5"/>`,
+  code: `<path d="M-6 -7 l-7 7 l7 7 M6 -7 l7 7 l-7 7 M3 -11 l-6 22"/>`,
+  game: `<rect x="-12" y="-7" width="24" height="15" rx="7"/><path d="M-7 0 h6 M-4 -3 v6"/><circle cx="5" cy="-1" r="1.5"/><circle cx="8" cy="2" r="1.5"/>`,
+  globe: `<circle r="11"/><path d="M-11 0 h22 M0 -11 c-6 6 -6 16 0 22 c6 -6 6 -16 0 -22"/>`,
+  eye: `<path d="M-12 0 c6 -9 18 -9 24 0 c-6 9 -18 9 -24 0 z"/><circle r="4"/>`,
+};
+const liveBadge = (S, url, x, y) => {
+  const up = !S.live || S.live[url] !== false;
+  return up ? `${pulseDot(x, y, '#34d399', 3)}<text x="${x + 10}" y="${y + 4}" class="m" font-size="9" letter-spacing="1.2" fill="#6ee7b7">LIVE</text>`
+    : `<circle cx="${x}" cy="${y}" r="3" fill="${C.dim}"/><text x="${x + 10}" y="${y + 4}" class="m" font-size="9" letter-spacing="1.2" fill="${C.dim}">OFFLINE</text>`;
+};
+function projects(S) {
+  const p = 'p', W = 1200, cw = 270, ch = 266, gx = 16, H = 104 + 2 * ch + gx + 30;
+  const cols = [C.y, C.o, C.m, C.t];
+  let s = head(p, W, H) + `</defs>${card(p, 0, 0, W, H)}${label(32, 44, '// FEATURED PROJECTS')}${title(32, 80, 'Shipped, deployed, live')}`;
+  const up = PROJECTS.filter(x => !S.live || S.live[x.url] !== false).length;
+  s += `${pulseDot(W - 248, 58, '#34d399', 3.5)}<text x="${W - 236}" y="62" class="m" font-size="11" fill="${C.mu}">${up}/${PROJECTS.length} up · checked ${esc(S.generated)}</text>`;
+  PROJECTS.forEach((it, i) => {
+    const x = 32 + (i % 4) * (cw + gx), y = 104 + Math.floor(i / 4) * (ch + gx), id = `${p}pc${i}`, col = cols[i % 4];
     s += `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16"/></clipPath><g>${enter(.2 + i * .12, 3)}<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="${r2(4 + i * .45)}s" repeatCount="indefinite"/>
 <rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16" fill="#fff" fill-opacity=".03" stroke="#fff" stroke-opacity=".1"/>
 <rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="16" stroke="${col}" stroke-opacity="0"><animate attributeName="stroke-opacity" values="0;0;.7;0;0" keyTimes="0;${r2(i / 8)};${r2(i / 8 + .06)};${r2(i / 8 + .14)};1" dur="8s" repeatCount="indefinite"/></rect>
 <rect x="${x}" y="${y}" width="${cw}" height="3" fill="${col}" opacity=".9" clip-path="url(#${id})"/>
 <rect x="${x + 18}" y="${y + 22}" width="44" height="44" rx="12" fill="${col}" fill-opacity=".14" stroke="${col}" stroke-opacity=".5"/>
-<g transform="translate(${x + 40},${y + 44})" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="${2 + i * .3}s" repeatCount="indefinite"/>${G[g]}</g></g>
-${pulseDot(x + cw - 72, y + 36, '#34d399', 3)}<text x="${x + cw - 62}" y="${y + 40}" class="m" font-size="9" letter-spacing="1" fill="${C.mu}">SHIPPED</text>
-<text x="${x + 18}" y="${y + 92}" class="m" font-size="9.5" letter-spacing="1.4" fill="${col}">${tag}</text>
-<text x="${x + 18}" y="${y + 114}" class="d" font-size="19" fill="${C.tx}">${esc(name)}</text>
-${wrap(desc, 36).slice(0, 4).map((l, k) => `<text x="${x + 18}" y="${y + 138 + k * 16}" class="m" font-size="10.8" fill="#bcd2dc">${esc(l)}</text>`).join('')}
-<path d="M${x + 18} ${y + ch - 34} H${x + cw - 18}" stroke="#fff" stroke-opacity=".07"/>
-<text x="${x + 18}" y="${y + ch - 15}" class="m" font-size="10" fill="${C.dim}">${esc(stackTxt)}</text>
+<g transform="translate(${x + 40},${y + 44})" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -2;0 0" dur="${2 + i * .3}s" repeatCount="indefinite"/>${GLYPH[it.g]}</g></g>
+${liveBadge(S, it.url, x + cw - 64, y + 36)}
+<text x="${x + 18}" y="${y + 92}" class="m" font-size="9.5" letter-spacing="1.4" fill="${col}">${it.tag}</text>
+<text x="${x + 18}" y="${y + 114}" class="d" font-size="19" fill="${C.tx}">${esc(it.name)}</text>
+${wrap(it.desc, 36).slice(0, 5).map((l, k) => `<text x="${x + 18}" y="${y + 138 + k * 16}" class="m" font-size="10.8" fill="#bcd2dc">${esc(l)}</text>`).join('')}
+<path d="M${x + 18} ${y + ch - 52} H${x + cw - 18}" stroke="#fff" stroke-opacity=".07"/>
+<text x="${x + 18}" y="${y + ch - 33}" class="m" font-size="10" fill="${C.dim}">${esc(it.stack)}</text>
+<text x="${x + 18}" y="${y + ch - 14}" class="m" font-size="10.5" fill="${C.o}">${esc(host(it.url).slice(0, 34))}</text>
+<g><animateTransform attributeName="transform" type="translate" values="0 0;3 -3;0 0" dur="1.6s" begin="-${r2(i * .2)}s" repeatCount="indefinite"/><path d="M${x + cw - 30} ${y + ch - 14} l8 -8 M${x + cw - 28} ${y + ch - 22} h6 v6" stroke="${C.o}" stroke-width="1.6" stroke-linecap="round"/></g>
 <g clip-path="url(#${id})"><rect x="${x - 120}" y="${y}" width="80" height="${ch}" fill="url(#${p}shine)"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${cw + 200} 0" keyTimes="0;${r2(i / 9)};${r2(i / 9 + .25)}" dur="7s" repeatCount="indefinite"/></rect></g></g></g>`;
   });
+  return s + '</svg>';
+}
+
+/* ------------------------------------------------------------------ client & creative builds */
+function builds(S) {
+  const p = 'b', W = 1200, H = 330, tw = (W - 64 - 4 * 14) / 5, th = 96;
+  let s = head(p, W, H) + `</defs>${card(p, 0, 0, W, H)}${label(32, 44, '// CLIENT & CREATIVE BUILDS', C.t)}${title(32, 80, 'More live on the web')}`;
+  BUILDS.forEach((b, i) => {
+    const x = 32 + (i % 5) * (tw + 14), y = 102 + Math.floor(i / 5) * (th + 14), id = `${p}t${i}`;
+    s += `<clipPath id="${id}"><rect x="${x}" y="${y}" width="${tw}" height="${th}" rx="14"/></clipPath><g>${enter(.2 + i * .1, 3)}
+<rect x="${x}" y="${y}" width="${tw}" height="${th}" rx="14" fill="#fff" fill-opacity=".03" stroke="#fff" stroke-opacity=".1"/>
+<g clip-path="url(#${id})"><rect x="${x}" y="${y}" width="4" height="${th}" fill="${b.c}"><animate attributeName="opacity" values=".35;1;.35" dur="3s" begin="-${r2(i * .3)}s" repeatCount="indefinite"/></rect>
+<rect x="${x}" y="${y + th - 3}" width="0" height="3" fill="${b.c}" opacity=".8"><animate attributeName="width" values="0;0;${r2(tw)};${r2(tw)}" keyTimes="0;${r2(i / 12)};${r2(i / 12 + .25)};1" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values=".8;.8;0" keyTimes="0;.8;1" dur="5s" repeatCount="indefinite"/></rect>
+<rect x="${x - 100}" y="${y}" width="60" height="${th}" fill="url(#${p}shine)"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${r2(tw + 160)} 0" keyTimes="0;${r2(i / 12)};${r2(i / 12 + .3)}" dur="6s" repeatCount="indefinite"/></rect></g>
+<text x="${x + 18}" y="${y + 26}" class="m" font-size="9" letter-spacing="1.2" fill="${b.c}">${esc(b.tag)}</text>
+${liveBadge(S, b.url, x + tw - 50, y + 22)}
+<text x="${x + 18}" y="${y + 52}" class="d" font-size="15.5" fill="${C.tx}">${esc(b.name)}</text>
+<text x="${x + 18}" y="${y + 76}" class="m" font-size="9.6" fill="${C.mu}">${esc(host(b.url).length > 31 ? host(b.url).slice(0, 30) + '…' : host(b.url))}</text></g>`;
+  });
+  return s + '</svg>';
+}
+
+/* ------------------------------------------------------------------ contribution skyline */
+function city(S) {
+  const p = 'k', W = 1200, H = 520, K = S.contrib;
+  const days = K.days, months = [];
+  days.forEach(([d, n]) => { const k = d.slice(0, 7); if (!months.length || months[months.length - 1][0] !== k) months.push([k, 0]); months[months.length - 1][1] += n; });
+  let run = 0, longest = 0; days.forEach(([, n]) => { run = n ? run + 1 : 0; longest = Math.max(longest, run); });
+  let current = 0; for (let i = days.length - 1; i >= 0; i--) { if (days[i][1]) current++; else if (i < days.length - 1) break; }
+  const best = days.reduce((a, b) => b[1] > a[1] ? b : a, ['', 0]);
+  const peak = months.reduce((a, b) => b[1] > a[1] ? b : a);
+  let s = head(p, W, H) + `
+<linearGradient id="${p}sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050b16"/><stop offset=".75" stop-color="#0b2236"/><stop offset="1" stop-color="#103048"/></linearGradient>
+<linearGradient id="${p}bld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16314a"/><stop offset="1" stop-color="#0a1726"/></linearGradient>
+<linearGradient id="${p}beam" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${C.o}" stop-opacity=".35"/><stop offset="1" stop-color="${C.o}" stop-opacity="0"/></linearGradient>
+<linearGradient id="${p}water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d2a40"/><stop offset="1" stop-color="${C.bg}"/></linearGradient>
+<clipPath id="${p}scene"><rect x="330" y="100" width="840" height="390" rx="16"/></clipPath>
+</defs>${card(p, 0, 0, W, H, { particles: 10 })}
+${label(32, 44, '// CONTRIBUTION CITY')}${title(32, 80, `${K.total} contributions — one tower per month`)}`;
+  // stats column
+  const tiles = [['CONTRIBUTIONS', K.total, 'last 12 months', C.y], ['COMMITS', K.commits, `${K.prs} pull requests`, C.o], ['LONGEST STREAK', longest, 'days in a row', C.m], ['CURRENT STREAK', current, 'days and counting', C.t], ['BUSIEST DAY', best[1], best[0] ? mdate(best[0]) : '', C.y], ['PEAK MONTH', peak[1], `${MON[+peak[0].slice(5) - 1]} ${peak[0].slice(0, 4)}`, C.o]];
+  tiles.forEach(([l, v, sub, col], i) => {
+    const x = 32 + (i % 2) * 144, y = 100 + Math.floor(i / 2) * 132;
+    s += `<g>${enter(.2 + i * .12, 3)}<rect x="${x}" y="${y}" width="134" height="120" rx="14" fill="#fff" fill-opacity=".03" stroke="#fff" stroke-opacity=".09"/>
+<rect x="${x}" y="${y}" width="134" height="120" rx="14" stroke="${col}" stroke-opacity="0"><animate attributeName="stroke-opacity" values="0;0;.8;0;0" keyTimes="0;${r2(i / 7)};${r2(i / 7 + .05)};${r2(i / 7 + .14)};1" dur="7s" repeatCount="indefinite"/></rect>
+<rect x="${x + 14}" y="${y + 14}" width="16" height="3" rx="1.5" fill="${col}"/>
+<text x="${x + 14}" y="${y + 36}" class="m" font-size="9" letter-spacing="1.1" fill="${C.mu}">${l}</text>${countUp(x + 14, y + 80, v, 32, C.tx)}
+<text x="${x + 14}" y="${y + 104}" class="m" font-size="9.5" fill="${C.dim}">${esc(sub)}</text></g>`;
+  });
+  // skyline scene
+  const sx = 330, sy = 100, sw = 840, sh = 390, ground = sy + 300, max = Math.max(...months.map(m => m[1]), 1);
+  const rnd = rng(42);
+  let stars = '';
+  for (let k = 0; k < 40; k++) stars += `<circle cx="${r2(sx + rnd() * sw)}" cy="${r2(sy + 8 + rnd() * 150)}" r="${r2(.5 + rnd() * 1.1)}" fill="#fff"><animate attributeName="opacity" values=".15;.9;.15" dur="${r2(1.5 + rnd() * 3)}s" begin="-${r2(rnd() * 3)}s" repeatCount="indefinite"/></circle>`;
+  s += `<g clip-path="url(#${p}scene)">
+<rect x="${sx}" y="${sy}" width="${sw}" height="${sh}" fill="url(#${p}sky)"/>${stars}
+<circle cx="${sx + sw - 90}" cy="${sy + 70}" r="30" fill="#e8fbff"/><circle cx="${sx + sw - 78}" cy="${sy + 62}" r="27" fill="#07101c"/>
+<circle cx="${sx + sw - 90}" cy="${sy + 70}" r="60" fill="${C.o}" opacity=".12" filter="url(#${p}blur)"/>
+${[0, 1].map(k => `<path d="M${sx + 200 + k * 420} ${ground} L${sx + 170 + k * 420} ${sy - 40} L${sx + 230 + k * 420} ${sy - 40} Z" fill="url(#${p}beam)"><animateTransform attributeName="transform" type="rotate" values="-25 ${sx + 200 + k * 420} ${ground};25 ${sx + 200 + k * 420} ${ground};-25 ${sx + 200 + k * 420} ${ground}" dur="${8 + k * 3}s" repeatCount="indefinite"/></path>`).join('')}
+<line x1="0" y1="0" x2="70" y2="0" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0"><animateTransform attributeName="transform" type="translate" values="${sx + 40} ${sy + 30};${sx + 460} ${sy + 120};${sx + 460} ${sy + 120}" keyTimes="0;.1;1" dur="9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.05;.1;1" dur="9s" repeatCount="indefinite"/></line>`;
+  const colW = sw / months.length;
+  let labels = '';
+  months.forEach(([m, n], i) => {
+    const bw = Math.round(colW * (.62 + rnd() * .16)), x = Math.round(sx + i * colW + (colW - bw) / 2);
+    const h = Math.max(14, Math.round(n / max * 230)), y = ground - h, isPeak = m === peak[0];
+    const a = r2(.05 + i * .05), b = r2(Math.min(.95, a + .35));
+    let win = '';
+    for (let wy = y + 12; wy < ground - 10; wy += 14) for (let wx = x + 6; wx < x + bw - 8; wx += 10) {
+      if (rnd() < .45) continue;
+      const lit = rnd(), c = lit > .85 ? C.y : lit > .6 ? C.o : '#ffe9a8';
+      win += `<rect x="${wx}" y="${wy}" width="5" height="7" rx="1" fill="${c}" opacity="${r2(.35 + rnd() * .5)}">${rnd() < .25 ? `<animate attributeName="opacity" values=".1;.9;.1" dur="${r2(2 + rnd() * 5)}s" begin="-${r2(rnd() * 5)}s" repeatCount="indefinite"/>` : ''}</rect>`;
+    }
+    s += `<g><animateTransform attributeName="transform" type="translate" values="0 ${h + 20};0 ${h + 20};0 0" keyTimes="0;${a};${b}" keySplines="0 0 1 1;.2 .9 .3 1" calcMode="spline" dur="3s" fill="freeze"/>
+<rect x="${x}" y="${y}" width="${bw}" height="${h}" fill="url(#${p}bld)" stroke="${isPeak ? C.y : C.o}" stroke-opacity="${isPeak ? .8 : .25}"/>${win}
+${isPeak ? `<path d="M${x + bw / 2} ${y} v-26" stroke="${C.y}" stroke-width="2"/><circle cx="${x + bw / 2}" cy="${y - 28}" r="3.5" fill="#ef4444"><animate attributeName="opacity" values="1;.1;1" dur="1.2s" repeatCount="indefinite"/></circle>` : ''}
+<text x="${x + bw / 2}" y="${y - (isPeak ? 40 : 8)}" text-anchor="middle" class="m" font-size="10.5" fill="${isPeak ? C.y : C.mu}">${n}</text></g>`;
+    labels += `<text x="${x + bw / 2}" y="${ground + 32}" text-anchor="middle" class="m" font-size="10" fill="${C.mu}">${MON[+m.slice(5) - 1]}</text>`;
+  });
+  // water reflection + road with moving car lights
+  s += `<rect x="${sx}" y="${ground}" width="${sw}" height="${sh - 300}" fill="url(#${p}water)"/>
+<rect x="${sx}" y="${ground}" width="${sw}" height="14" fill="#0b1724"/>
+<path d="M${sx} ${ground + 7} H${sx + sw}" stroke="${C.y}" stroke-opacity=".5" stroke-dasharray="14 12"><animate attributeName="stroke-dashoffset" values="0;-52" dur="1.2s" repeatCount="indefinite"/></path>
+${[0, 1, 2, 3].map(k => `<g><animateTransform attributeName="transform" type="translate" values="${k % 2 ? `${sx + sw + 20} 0;${sx - 40} 0` : `${sx - 40} 0;${sx + sw + 20} 0`}" dur="${5 + k * 1.7}s" begin="-${k * 1.9}s" repeatCount="indefinite"/><rect x="0" y="${ground + (k % 2 ? 2 : 8)}" width="16" height="4" rx="2" fill="${k % 2 ? '#ef4444' : '#fef3c7'}"/><rect x="${k % 2 ? 16 : -24}" y="${ground + (k % 2 ? 3 : 9)}" width="24" height="2" fill="${k % 2 ? '#ef4444' : '#fef3c7'}" opacity=".35"/></g>`).join('')}
+${[0, 1, 2, 3, 4, 5].map(k => `<path d="M${sx + 30 + k * 140} ${ground + 48 + (k % 3) * 12} h${40 + (k % 2) * 30}" stroke="${[C.o, C.y, C.m][k % 3]}" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" values="0 0;12 0;0 0" dur="${3 + k * .4}s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".1;.45;.1" dur="${2 + k * .3}s" repeatCount="indefinite"/></path>`).join('')}
+${labels}</g>
+<rect x="${sx}" y="${sy}" width="${sw}" height="${sh}" rx="16" stroke="#fff" stroke-opacity=".1"/>`;
   return s + '</svg>';
 }
 
@@ -769,13 +901,24 @@ function syncReadme(S, version) {
   md = md.replace(/<!--S:(\w+)-->[\s\S]*?<!--\/S-->/g, (m, k) => k in vals ? `<!--S:${k}-->${vals[k]}<!--/S-->` : m);
   const latest = S.prs.slice(0, 6).map(x => `- ✅ \`${x.date}\` [${x.repo}#${x.number}](${x.url}) — ${x.title.replace(/[[\]]/g, '')}`).join('\n');
   md = md.replace(/<!-- LATEST:START -->[\s\S]*?<!-- LATEST:END -->/, `<!-- LATEST:START -->\n${latest}\n<!-- LATEST:END -->`);
+  const st = u => !S.live || S.live[u] !== false ? '🟢 live' : '⚪ offline';
+  const rows = [
+    '| | Project | What it is | Live link |', '|---|---|---|---|',
+    ...PROJECTS.map(x => `| ${st(x.url)} | **${x.name}** | ${x.desc} | [${host(x.url)}](${x.url}) |`),
+    ...BUILDS.map(x => `| ${st(x.url)} | **${x.name}** | ${x.tag.charAt(0) + x.tag.slice(1).toLowerCase()} | [${host(x.url)}](${x.url}) |`),
+  ].join('\n');
+  md = md.replace(/<!-- PROJECTS:START -->[\s\S]*?<!-- PROJECTS:END -->/, `<!-- PROJECTS:START -->\n${rows}\n<!-- PROJECTS:END -->`);
+  if (S.contrib) {
+    const v2 = { contrib: S.contrib.total, commits: S.contrib.commits };
+    md = md.replace(/<!--C:(\w+)-->[\s\S]*?<!--\/C-->/g, (m, k) => k in v2 ? `<!--C:${k}-->${v2[k]}<!--/C-->` : m);
+  }
   md = md.replace(/\.svg\?v=[\w-]+/g, `.svg?v=${version}`);
   fs.writeFileSync(f, md);
 }
 
 (async () => {
   const S = await loadStats();
-  const files = { 'hero.svg': hero, 'about-life.svg': about, 'stack.svg': stack, 'id-dashboard.svg': idDash, 'feed.svg': feed, 'timeline.svg': timeline, 'projects.svg': projects, 'connect.svg': connect, 'divider.svg': divider };
+  const files = { 'hero.svg': hero, 'about-life.svg': about, 'stack.svg': stack, 'id-dashboard.svg': idDash, 'feed.svg': feed, 'timeline.svg': timeline, 'projects.svg': projects, 'deploys.svg': builds, 'city.svg': city, 'connect.svg': connect, 'divider.svg': divider };
   const hash = crypto.createHash('sha1');
   for (const [f, fn] of Object.entries(files)) {
     const svg = fn(S);
