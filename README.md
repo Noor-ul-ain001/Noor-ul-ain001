@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="./hero.svg?v=46c34445" width="100%" alt="Noor ul Ain — Agentic AI Engineer, spec-kit contributor, MCP workflow builder"/>
+<img src="./hero.svg?v=238cec3f" width="100%" alt="Noor ul Ain — Agentic AI Engineer, spec-kit contributor, MCP workflow builder"/>
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-noor--mudasir--299a64256-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/noor-mudasir-299a64256/)
 [![GitHub](https://img.shields.io/badge/GitHub-Noor--ul--ain001-5b7cff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Noor-ul-ain001)
 [![Portfolio](https://img.shields.io/badge/Portfolio-noor--ul--ain--dev-2ee6ff?style=for-the-badge&logo=vercel&logoColor=black)](https://noor-ul-ain-dev.vercel.app)
 [![Email](https://img.shields.io/badge/Email-aina25239@gmail.com-c6ff3d?style=for-the-badge&logo=gmail&logoColor=black)](mailto:aina25239@gmail.com)
 
-<img src="./about-life.svg?v=46c34445" width="100%" alt="What I build — multi-agent orchestration, RAG pipelines, MCP workflows — and life beyond the terminal"/>
+<img src="./about-life.svg?v=238cec3f" width="100%" alt="What I build — multi-agent orchestration, RAG pipelines, MCP workflows — and life beyond the terminal"/>
 
-<img src="./divider.svg?v=46c34445" width="100%"/>
+<img src="./divider.svg?v=238cec3f" width="100%"/>
 
 </div>
 
@@ -21,7 +21,7 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 | | |
 |---|---|
-| ⚡ | **<!--S:merged-->74<!--/S--> merged PRs** in open source, **<!--S:open-->2<!--/S--> more in review** (auto-synced <!--S:synced-->2026-10-25<!--/S-->) |
+| ⚡ | **<!--S:merged-->74<!--/S--> merged PRs** in open source, **<!--S:open-->2<!--/S--> more in review** (auto-synced <!--S:synced-->2026-10-26<!--/S-->) |
 | 🤖 | Currently enrolled in **Panaversity Agent Factory Program (GIAIC)** under Sir Anas — specializing in Loop Engineering & Digital FTE |
 | 🏗️ | Proficient in multi-agent orchestration, harness engineering, and spec‑driven development |
 | 🎓 | **Anthropic Certified** — MCP Fundamentals, Claude Code in Action, Claude 101 |
@@ -30,15 +30,15 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./timeline.svg?v=46c34445" width="100%" alt="Journey timeline and credentials — Panaversity, OpenClaw, spec-kit, DYLP GenAI Hackathon, Anthropic and Forage certifications"/>
+<img src="./timeline.svg?v=238cec3f" width="100%" alt="Journey timeline and credentials — Panaversity, OpenClaw, spec-kit, DYLP GenAI Hackathon, Anthropic and Forage certifications"/>
 
-<img src="./divider.svg?v=46c34445" width="100%"/>
+<img src="./divider.svg?v=238cec3f" width="100%"/>
 
-<img src="./stack.svg?v=46c34445" width="100%" alt="Tech orbit and toolkit — AI/agents, frontend, backend & data, vision & DevOps"/>
+<img src="./stack.svg?v=238cec3f" width="100%" alt="Tech orbit and toolkit — AI/agents, frontend, backend & data, vision & DevOps"/>
 
-<img src="./id-dashboard.svg?v=46c34445" width="100%" alt="ID badge and live dashboard — spec-kit merges, merged PRs, PRs in review, public repos, merges per month"/>
+<img src="./id-dashboard.svg?v=238cec3f" width="100%" alt="ID badge and live dashboard — spec-kit merges, merged PRs, PRs in review, public repos, merges per month"/>
 
-<img src="./divider.svg?v=46c34445" width="100%"/>
+<img src="./divider.svg?v=238cec3f" width="100%"/>
 
 </div>
 
@@ -46,7 +46,7 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./feed.svg?v=46c34445" width="100%" alt="Live feed of my latest merged pull requests and merge-day heatmap"/>
+<img src="./feed.svg?v=238cec3f" width="100%" alt="Live feed of my latest merged pull requests and merge-day heatmap"/>
 
 </div>
 
@@ -75,7 +75,7 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./divider.svg?v=46c34445" width="100%"/>
+<img src="./divider.svg?v=238cec3f" width="100%"/>
 
 </div>
 
@@ -83,9 +83,9 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./projects.svg?v=46c34445" width="100%" alt="Featured deployed projects — Shieldly, KSoR, TaskFlow, IRIS AXIS, Pixel's AI Academy, MCP Transports, JS Visualizer, The Buzz Crew"/>
+<img src="./projects.svg?v=238cec3f" width="100%" alt="Featured deployed projects — Shieldly, KSoR, TaskFlow, IRIS AXIS, Pixel's AI Academy, MCP Transports, JS Visualizer, The Buzz Crew"/>
 
-<img src="./deploys.svg?v=46c34445" width="100%" alt="Client and creative builds live on the web"/>
+<img src="./deploys.svg?v=238cec3f" width="100%" alt="Client and creative builds live on the web"/>
 
 </div>
 
@@ -133,7 +133,7 @@ My mission is to create autonomous, intelligent systems that act as digital empl
 
 <div align="center">
 
-<img src="./city.svg?v=46c34445" width="100%" alt="Animated contribution skyline — one tower per month, with streaks and totals"/>
+<img src="./city.svg?v=238cec3f" width="100%" alt="Animated contribution skyline — one tower per month, with streaks and totals"/>
 
 <sub><b><!--C:contrib-->484<!--/C--></b> contributions · <b><!--C:commits-->229<!--/C--></b> commits in the last year — rebuilt from live GitHub data</sub>
 
@@ -151,9 +151,9 @@ My mission is to create autonomous, intelligent systems that act as digital empl
   <img src="https://raw.githubusercontent.com/Noor-ul-ain001/Noor-ul-ain001/output/github-contribution-grid-snake-dark.svg" width="100%" alt="Contribution snake eating my commit grid"/>
 </picture>
 
-<img src="./divider.svg?v=46c34445" width="100%"/>
+<img src="./divider.svg?v=238cec3f" width="100%"/>
 
-<img src="./connect.svg?v=46c34445" width="100%" alt="Connect with Noor ul Ain"/>
+<img src="./connect.svg?v=238cec3f" width="100%" alt="Connect with Noor ul Ain"/>
 
 *🤝 Open to remote internships and roles in AI/ML Engineering, Agentic AI, and Full‑Stack Development. Let's build something amazing together!*
 
