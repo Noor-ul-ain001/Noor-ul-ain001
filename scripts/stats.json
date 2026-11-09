@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-08",
+ "generated": "2026-11-09",
  "prs": [
   {
    "repo": "github/spec-kit",
@@ -524,8 +524,8 @@
  "repos": 89,
  "followers": 25,
  "contrib": {
-  "total": 477,
-  "commits": 223,
+  "total": 471,
+  "commits": 219,
   "prs": 92,
   "reviews": 1,
   "issues": 0,
@@ -1988,6 +1988,10 @@
    ],
    [
     "2026-11-08",
+    0
+   ],
+   [
+    "2026-11-09",
     0
    ]
   ]
